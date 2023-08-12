@@ -1,11 +1,11 @@
 export default function Header() {
   return (
-    <header className="bg-teal-800 text-lg">
-      <div className="w-4/5 p-6 flex justify-between mx-auto">
+    <header className="text-slate-200 shadow-lg shadow-primary/50 text-xl">
+      <div className="container p-6 flex items-center justify-between mx-auto">
         <p>LOGO</p>
-        <ul className="flex gap-6">
-          <li>Sign In</li>
-          <li>Sign Up</li>
+        <ul className="flex items-center gap-6">
+          <li className="">Sign In</li>
+          <li className="bg-primary px-4 py-2 rounded">Sign Up</li>
         </ul>
       </div>
     </header>
