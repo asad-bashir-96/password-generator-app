@@ -13,7 +13,7 @@ export default function PasswordList() {
               placeholder="Search passwords"
               id="search"
               type="search"
-              className="border-b bg-transparent border-neutral-400 focus:border-accent placeholder:text-neutral-400 outline-none"
+              className="border-b border-0 w-full block bg-transparent border-gray-200 focus:border-accent placeholder:text-neutral-400 outline-none"
             />
           </div>
         </form>
