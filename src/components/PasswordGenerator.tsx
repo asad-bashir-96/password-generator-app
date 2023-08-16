@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RefreshCw, Check } from "react-feather";
 import generator from "generate-password-ts";
 import * as Checkbox from "@radix-ui/react-checkbox";
@@ -25,23 +25,39 @@ export default function PasswordGenerator({
   initialSettings,
 }: PasswordGeneratorProps) {
   const [password, setPassword] = useState(initialPassword);
-  const [length, setLength] = useState(8);
   const [settings, setSettings] = useState(initialSettings);
+
+  useEffect(() => {
+    const password = generator.generate(settings);
+    setPassword(password);
+  }, [settings]);
 
   function generatePassword() {
     const password = generator.generate(settings);
-
     setPassword(password);
-    setSettings({ ...settings, length });
   }
 
   function handleNumberChange() {
     setSettings((prev) => {
       return { ...prev, numbers: !prev.numbers };
     });
-    const password = generator.generate(settings);
+  }
 
-    setPassword(password);
+  function handleLowerCaseChange() {
+    setSettings((prev) => {
+      return { ...prev, lowercase: !prev.lowercase };
+    });
+  }
+  function handleUpperCaseChange() {
+    setSettings((prev) => {
+      return { ...prev, uppercase: !prev.uppercase };
+    });
+  }
+
+  function handleSymbloChange() {
+    setSettings((prev) => {
+      return { ...prev, symbols: !prev.symbols };
+    });
   }
 
   return (
@@ -71,12 +87,8 @@ export default function PasswordGenerator({
               </CopyToClipboard>
             </div>
             <div className=" flex flex-col justify-center">
-              <p className=" ">{`Length (${length})`}</p>
-              <Slider
-                generatePassword={generatePassword}
-                length={length}
-                setLength={setLength}
-              />
+              <p className=" ">{`Length (${settings.length})`}</p>
+              <Slider settings={settings} setSettings={setSettings} />
 
               <ul className="flex justify-between">
                 <li className="flex gap-2 items-center  ">
@@ -92,7 +104,11 @@ export default function PasswordGenerator({
                   <p>Numbers</p>
                 </li>
                 <li className="flex gap-2 items-center  ">
-                  <Checkbox.Root className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none">
+                  <Checkbox.Root
+                    checked={settings.lowercase}
+                    onCheckedChange={handleLowerCaseChange}
+                    className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
+                  >
                     <Checkbox.Indicator>
                       <Check className="text-black" />
                     </Checkbox.Indicator>
@@ -100,7 +116,11 @@ export default function PasswordGenerator({
                   <p>Lowercase</p>
                 </li>
                 <li className="flex gap-2 items-center  ">
-                  <Checkbox.Root className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none">
+                  <Checkbox.Root
+                    checked={settings.uppercase}
+                    onCheckedChange={handleUpperCaseChange}
+                    className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
+                  >
                     <Checkbox.Indicator>
                       <Check className="text-black" />
                     </Checkbox.Indicator>
@@ -108,7 +128,11 @@ export default function PasswordGenerator({
                   <p>Uppercase</p>
                 </li>
                 <li className="flex gap-2 items-center  ">
-                  <Checkbox.Root className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none">
+                  <Checkbox.Root
+                    checked={settings.symbols}
+                    onCheckedChange={handleSymbloChange}
+                    className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
+                  >
                     <Checkbox.Indicator>
                       <Check className="text-black" />
                     </Checkbox.Indicator>
