@@ -2,13 +2,20 @@ import PasswordList from "@/components/PasswordList";
 import Header from "@/components/Header";
 import PasswordGenerator from "@/components/PasswordGenerator";
 import generator from "generate-password-ts";
-export default function Home() {
+import { db } from "@/lib/db";
+export default async function Home() {
+  try {
+    const res = db.query("select * from users");
+    console.log(`${res} production is fetching`);
+  } catch (e) {
+    console.log(e);
+  }
   const initialSettings = {
     length: 8,
     numbers: true,
-    symbols: true,
     lowercase: true,
     uppercase: true,
+    symbols: false,
     strict: true,
   };
   const initialPassword = generator.generate(initialSettings);

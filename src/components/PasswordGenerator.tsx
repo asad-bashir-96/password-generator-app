@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { RefreshCw } from "react-feather";
+import { RefreshCw, Check } from "react-feather";
 import generator from "generate-password-ts";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -22,17 +22,11 @@ type PasswordGeneratorProps = {
 
 export default function PasswordGenerator({
   initialPassword,
+  initialSettings,
 }: PasswordGeneratorProps) {
   const [password, setPassword] = useState(initialPassword);
   const [length, setLength] = useState(8);
-  const [settings, setSettings] = useState<Settings>({
-    length: 8,
-    numbers: true,
-    symbols: true,
-    lowercase: true,
-    uppercase: true,
-    strict: true,
-  });
+  const [settings, setSettings] = useState(initialSettings);
 
   function generatePassword() {
     const password = generator.generate(settings);
@@ -40,6 +34,16 @@ export default function PasswordGenerator({
     setPassword(password);
     setSettings({ ...settings, length });
   }
+
+  function handleNumberChange() {
+    setSettings((prev) => {
+      return { ...prev, numbers: !prev.numbers };
+    });
+    const password = generator.generate(settings);
+
+    setPassword(password);
+  }
+
   return (
     <div className="py-2 text-slate-200">
       <div className="container   flex flex-col gap-5 items-center mx-auto">
@@ -73,6 +77,45 @@ export default function PasswordGenerator({
                 length={length}
                 setLength={setLength}
               />
+
+              <ul className="flex justify-between">
+                <li className="flex gap-2 items-center  ">
+                  <Checkbox.Root
+                    checked={settings.numbers}
+                    onCheckedChange={handleNumberChange}
+                    className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
+                  >
+                    <Checkbox.Indicator>
+                      <Check className="text-black" />
+                    </Checkbox.Indicator>
+                  </Checkbox.Root>
+                  <p>Numbers</p>
+                </li>
+                <li className="flex gap-2 items-center  ">
+                  <Checkbox.Root className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none">
+                    <Checkbox.Indicator>
+                      <Check className="text-black" />
+                    </Checkbox.Indicator>
+                  </Checkbox.Root>
+                  <p>Lowercase</p>
+                </li>
+                <li className="flex gap-2 items-center  ">
+                  <Checkbox.Root className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none">
+                    <Checkbox.Indicator>
+                      <Check className="text-black" />
+                    </Checkbox.Indicator>
+                  </Checkbox.Root>
+                  <p>Uppercase</p>
+                </li>
+                <li className="flex gap-2 items-center  ">
+                  <Checkbox.Root className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none">
+                    <Checkbox.Indicator>
+                      <Check className="text-black" />
+                    </Checkbox.Indicator>
+                  </Checkbox.Root>
+                  <p>Symbols</p>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
