@@ -2,10 +2,10 @@ import PasswordList from "@/components/PasswordList";
 import Header from "@/components/Header";
 import PasswordGenerator from "@/components/PasswordGenerator";
 import generator from "generate-password-ts";
-import { db } from "@/lib/db";
+import { getUsers } from "@/lib/db";
 export default async function Home() {
-  const [rows] = await db.query("select * from users");
-  console.log(rows);
+  const data = await getUsers();
+  console.log(data);
 
   const initialSettings = {
     length: 8,
@@ -25,7 +25,7 @@ export default async function Home() {
       />
       <main className=" container mx-auto flex-grow  flex items-center justify-center ">
         <PasswordList />
-        <h1>{rows[0].email}</h1>
+        <h1>{data?.email}</h1>
       </main>
     </div>
   );
