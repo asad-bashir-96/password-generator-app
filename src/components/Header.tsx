@@ -7,7 +7,7 @@ export default function Header() {
           <li className="cursor-pointer transition ease-in duration-150 hover:text-accent">
             Sign In
           </li>
-          <li className="bg-primary shadow-lg shadow-primary/90 hover:animate-bounce hover:text-accent transition ease-in duration-150 cursor-pointer px-4 py-2 rounded">
+          <li className="bg-primary shadow-lg shadow-primary/90  hover:text-accent transition ease-in duration-150 cursor-pointer px-4 py-2 rounded">
             Sign Up
           </li>
         </ul>

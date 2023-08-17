@@ -26,15 +26,64 @@ export default function PasswordGenerator({
 }: PasswordGeneratorProps) {
   const [password, setPassword] = useState(initialPassword);
   const [settings, setSettings] = useState(initialSettings);
+  const [isDisabled, setIsDisabled] = useState({
+    numbers: false,
+    lowerCase: false,
+    upperCase: false,
+    symbols: false,
+  });
 
   useEffect(() => {
-    const password = generator.generate(settings);
-    setPassword(password);
+    checkIfDisabled();
+    generatePassword();
   }, [settings]);
 
   function generatePassword() {
     const password = generator.generate(settings);
     setPassword(password);
+  }
+
+  function checkIfDisabled() {
+    //Numbers
+    if (!(settings.lowercase || settings.uppercase || settings.symbols)) {
+      setIsDisabled((prev) => {
+        return { ...prev, numbers: true };
+      });
+    } else {
+      setIsDisabled((prev) => {
+        return { ...prev, numbers: false };
+      });
+    }
+    //Lowercase
+    if (!(settings.numbers || settings.uppercase || settings.symbols)) {
+      setIsDisabled((prev) => {
+        return { ...prev, lowerCase: true };
+      });
+    } else {
+      setIsDisabled((prev) => {
+        return { ...prev, lowerCase: false };
+      });
+    }
+    //Uppercase
+    if (!(settings.numbers || settings.lowercase || settings.symbols)) {
+      setIsDisabled((prev) => {
+        return { ...prev, upperCase: true };
+      });
+    } else {
+      setIsDisabled((prev) => {
+        return { ...prev, upperCase: false };
+      });
+    }
+    //Symbols
+    if (!(settings.numbers || settings.uppercase || settings.lowercase)) {
+      setIsDisabled((prev) => {
+        return { ...prev, symbols: true };
+      });
+    } else {
+      setIsDisabled((prev) => {
+        return { ...prev, symbols: false };
+      });
+    }
   }
 
   function handleNumberChange() {
@@ -93,51 +142,103 @@ export default function PasswordGenerator({
               <ul className="flex justify-between">
                 <li className="flex gap-2 items-center  ">
                   <Checkbox.Root
+                    disabled={isDisabled.numbers}
                     checked={settings.numbers}
                     onCheckedChange={handleNumberChange}
                     className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
                   >
                     <Checkbox.Indicator>
-                      <Check className="text-black" />
+                      <Check
+                        className={`transition duration-150 ease-in ${
+                          isDisabled.numbers
+                            ? "bg-accent text-white"
+                            : "text-black"
+                        }`}
+                      />
                     </Checkbox.Indicator>
                   </Checkbox.Root>
-                  <p>Numbers</p>
+                  <p
+                    className={`transition duration-150 ease-in ${
+                      isDisabled.numbers ? "line-through text-gray-500" : ""
+                    }`}
+                  >
+                    Numbers
+                  </p>
                 </li>
                 <li className="flex gap-2 items-center  ">
                   <Checkbox.Root
+                    disabled={isDisabled.lowerCase}
                     checked={settings.lowercase}
                     onCheckedChange={handleLowerCaseChange}
                     className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
                   >
                     <Checkbox.Indicator>
-                      <Check className="text-black" />
+                      <Check
+                        className={`transition duration-150 ease-in ${
+                          isDisabled.lowerCase
+                            ? "bg-accent text-white"
+                            : "text-black"
+                        }`}
+                      />
                     </Checkbox.Indicator>
                   </Checkbox.Root>
-                  <p>Lowercase</p>
+                  <p
+                    className={`transition duration-150 ease-in ${
+                      isDisabled.lowerCase ? "line-through text-gray-500" : ""
+                    }`}
+                  >
+                    Lowercase
+                  </p>
                 </li>
                 <li className="flex gap-2 items-center  ">
                   <Checkbox.Root
+                    disabled={isDisabled.upperCase}
                     checked={settings.uppercase}
                     onCheckedChange={handleUpperCaseChange}
                     className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
                   >
                     <Checkbox.Indicator>
-                      <Check className="text-black" />
+                      <Check
+                        className={`transition duration-150 ease-in ${
+                          isDisabled.upperCase
+                            ? "bg-accent text-white"
+                            : "text-black"
+                        }`}
+                      />
                     </Checkbox.Indicator>
                   </Checkbox.Root>
-                  <p>Uppercase</p>
+                  <p
+                    className={`transition duration-150 ease-in ${
+                      isDisabled.upperCase ? "line-through text-gray-500" : ""
+                    }`}
+                  >
+                    Uppercase
+                  </p>
                 </li>
                 <li className="flex gap-2 items-center  ">
                   <Checkbox.Root
+                    disabled={isDisabled.symbols}
                     checked={settings.symbols}
                     onCheckedChange={handleSymbloChange}
                     className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
                   >
                     <Checkbox.Indicator>
-                      <Check className="text-black" />
+                      <Check
+                        className={`transition duration-150 ease-in ${
+                          isDisabled.symbols
+                            ? "bg-accent text-white"
+                            : "text-black"
+                        }`}
+                      />
                     </Checkbox.Indicator>
                   </Checkbox.Root>
-                  <p>Symbols</p>
+                  <p
+                    className={`transition duration-150 ease-in ${
+                      isDisabled.symbols ? "line-through text-gray-500" : ""
+                    }`}
+                  >
+                    Symblos
+                  </p>
                 </li>
               </ul>
             </div>
