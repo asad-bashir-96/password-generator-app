@@ -1,29 +1,60 @@
-import { Copy, Search, Trash2, Edit3 } from "react-feather";
-export default function PasswordList() {
+import { Search } from "react-feather";
+import { auth } from "@clerk/nextjs";
+import Link from "next/link";
+import getEntriesById from "@/lib/getEntriesById";
+import SavedPassword from "./SavedPassword";
+
+export default async function PasswordList() {
+  const { userId } = auth();
+  const data = await getEntriesById(String(userId));
+  console.log(data);
   return (
-    <div className="flex gap-5 p-4  mb-20  rounded bg-white dark:bg-secondary dark:text-slate-200  flex-col w-4/5 max-w-4xl">
-      <div className=" flex justify-between">
-        <p>1 passwords saved</p>
-        <form>
-          <div className="flex items-center gap-1 mb-5">
-            <label htmlFor="search">
-              <Search className="h-5" />
-            </label>
-            <input
-              placeholder="Search passwords"
-              id="search"
-              type="search"
-              className="border-b border-0 w-full block bg-transparent border-gray-200 focus:border-accent placeholder:text-neutral-400 outline-none"
-            />
-          </div>
-        </form>
+    <div className="flex gap-5 p-4  mb-20  rounded bg-secondary dark:text-slate-200  flex-col w-4/5 max-w-4xl">
+      <div className="flex justify-between">
+        <p>{`${data?.length} password saved`}</p>
+
+        <div className="flex items-center gap-1 mb-2">
+          <label htmlFor="search">
+            <Search className="h-5" />
+          </label>
+          <input
+            placeholder="Search passwords"
+            id="search"
+            type="search"
+            className="border-b  w-full transition duration-150 ease-in bg-transparent border-neutral-400 focus:border-accent placeholder:text-neutral-400 outline-none"
+          />
+        </div>
       </div>
-      <div className="flex  justify-between">
-        <p>amazon</p>
-        <button>
-          <Copy className="h-5" />
-        </button>
+      <div className="divide-y">
+        {data?.map((entry, index) => (
+          <SavedPassword
+            key={index}
+            secret={entry.secret}
+            title={entry.title}
+          />
+        ))}
       </div>
+
+      <Link
+        href="/new-password"
+        className="bg-primary mt-4 relative text-center  capitalize py-3 px-2 rounded text-white"
+      >
+        Add New Password
+      </Link>
     </div>
   );
+}
+
+{
+  /* <div className="flex items-center gap-1">
+          <button>
+            <Eye className="h-5  transition ease-in-out duration-300  hover:text-accent" />
+          </button>
+          <button>
+            <Copy className="h-5  transition ease-in-out duration-300  hover:text-accent" />
+          </button>
+          <button>
+            <MoreVertical className="h-5  transition ease-in-out duration-300  hover:text-accent" />
+          </button>
+        </div> */
 }

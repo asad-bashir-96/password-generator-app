@@ -110,12 +110,12 @@ export default function PasswordGenerator({
   }
 
   return (
-    <div className="py-2 text-slate-200">
+    <div className="py-2 rounded text-slate-200">
       <div className="container   flex flex-col gap-5 items-center mx-auto">
         <h1 className="text-5xl my-6 font-normal  capitalize">
           password management system
         </h1>
-        <div className="w-4/5 max-w-4xl p-4 rounded bg-white dark:bg-secondary">
+        <div className="w-4/5 max-w-4xl p-4 rounded bg-secondary">
           <div className="w-4/5 mx-auto ">
             <h2 className="text-center mb-10 text-2xl">password settings</h2>
             <div className="border-b items-center justify-between pb-1  flex text-2xl">
@@ -139,7 +139,7 @@ export default function PasswordGenerator({
               <p className=" ">{`Length (${settings.length})`}</p>
               <Slider settings={settings} setSettings={setSettings} />
 
-              <ul className="flex justify-between">
+              <ul className="flex flex-wrap gap-y-6 justify-between">
                 <li className="flex gap-2 items-center  ">
                   <Checkbox.Root
                     disabled={isDisabled.numbers}
