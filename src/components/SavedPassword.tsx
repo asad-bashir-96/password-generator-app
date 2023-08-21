@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Eye, Copy, MoreVertical, Edit, Trash2 } from "react-feather";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 type SavedPasswordProps = {
   title: string;
   secret: string;
