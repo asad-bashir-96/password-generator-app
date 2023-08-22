@@ -1,14 +1,8 @@
-import {
-  mysqlTable,
-  mysqlSchema,
-  AnyMySqlColumn,
-  primaryKey,
-  varchar,
-} from "drizzle-orm/mysql-core";
-import { sql } from "drizzle-orm";
+import { mysqlTable, varchar, int } from "drizzle-orm/mysql-core";
 
 export const entries = mysqlTable("entries", {
-  id: varchar("id", { length: 255 }).notNull(),
+  id: int("id").autoincrement().notNull(),
+  userId: varchar("userId", { length: 255 }).notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   secret: varchar("secret", { length: 255 }).notNull(),
 });

@@ -1,10 +1,10 @@
 "use client";
-import { addEntry } from "@/lib/actions";
+import { addPassword } from "@/lib/actions";
 export default function NewPasswordForm() {
   return (
     <form
       className="border  p-6 rounded-md text-black font-medium  bg-neutral-100"
-      action={addEntry}
+      action={addPassword}
     >
       <h2 className="text-3xl text-center mb-8">Store your password</h2>
       <div className="flex flex-col gap-2">

@@ -1,20 +1,39 @@
 "use server";
-import { db } from "../..";
-import { entries } from "@/db/schema";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import {
+  insertPassword,
+  updatePasswordById,
+  deletePasswordById,
+} from "./controllers";
+const { userId } = auth();
 
-export async function addEntry(data: FormData) {
-  const { userId } = auth();
+export async function addPassword(data: FormData) {
   const title = String(data.get("title"));
-  const secret = String(data.get("password"));
+  const password = String(data.get("password"));
   if (userId) {
-    await db.insert(entries).values({
-      id: userId,
-      title,
-      secret,
-    });
+    await insertPassword({ userId, secret: password, title });
+    console.log("password has been added to database");
   }
-  console.log("entry has been added to database");
+
+  redirect("/");
+}
+
+export async function editPassword(data: FormData) {
+  const id = Number(data.get("id"));
+  const password = String(data.get("newpassword"));
+  if (userId) {
+    await updatePasswordById(id, password);
+    console.log("password has been updated");
+  }
+  redirect("/");
+}
+
+export async function deletePassword(data: FormData) {
+  const id = Number(data.get("id"));
+  if (userId) {
+    await deletePasswordById(id);
+    console.log(`password has been deleted`);
+  }
   redirect("/");
 }

@@ -130,7 +130,7 @@ export default function PasswordGenerator({
                 onCopy={() => console.log("copied")}
                 text={password}
               >
-                <button className="bg-primary mt-4 relative  capitalize py-3 px-2 rounded text-white">
+                <button className="bg-primary mt-4 relative  hover:bg-primary/80 transition ease-in duration-100   capitalize py-3 px-2 rounded text-white">
                   copy password
                 </button>
               </CopyToClipboard>
