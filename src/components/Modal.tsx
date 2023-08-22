@@ -26,7 +26,7 @@ function Modal({ id, showEdit }: ModalProps) {
   return (
     <>
       <button
-        className="bg-transparent border-none btn hover:bg-transparent outline-none absolute top-0 w-full left-0 "
+        className="bg-transparent border border-red-500 btn hover:bg-transparent outline-none absolute top-0 w-full left-0 "
         onClick={openModal}
       ></button>
       <dialog ref={modalRef} className="modal">
@@ -37,7 +37,7 @@ function Modal({ id, showEdit }: ModalProps) {
           >
             <h3 className="text-2xl">Edit saved password</h3>
             <div className="flex flex-col gap-2 mt-5">
-              <label className="block " htmlFor="newpassword">
+              <label className="block" htmlFor="newpassword">
                 Enter new password
               </label>
               <input type="text" hidden name="id" defaultValue={id} />

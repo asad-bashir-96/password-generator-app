@@ -18,10 +18,12 @@ export default async function Home() {
   return (
     <div className="min-h-screen flex  flex-col bg-slate-900">
       <Header />
-      <PasswordGenerator
-        initialSettings={initialSettings}
-        initialPassword={initialPassword}
-      />
+      <section>
+        <PasswordGenerator
+          initialSettings={initialSettings}
+          initialPassword={initialPassword}
+        />
+      </section>
       <main className=" container mx-auto flex-grow  flex items-center justify-center ">
         {userId ? <PasswordList /> : <p>sign in to store passwords</p>}
       </main>
