@@ -1,28 +1,26 @@
 "use client";
-import { addPassword } from "@/lib/actions";
+import { editPassword } from "@/lib/actions";
 import Link from "next/link";
-export default function NewPassword() {
+
+export default function Page({ params }: { params: { id: string } }) {
   return (
     <div className="w-full min-h-screen bg-slate-900 flex justify-center items-center">
       <form
-        action={addPassword}
+        action={editPassword}
         className="bg-secondaryDark shadow-lg  z-10 text-slate-200 modal-box"
       >
-        <h3 className="text-3xl">Create new password</h3>
-        <div className="flex flex-col gap-2 mt-5">
-          <label className="text-xl block">Title</label>
-          <input
-            className="p-1  text-black text-xl bg-white  w-80 rounded border mb-2  focus:outline-accent"
-            type="text"
-            name="title"
-            id="title"
-          />
-          <label className="text-xl block">Password</label>
+        <h3 className="text-3xl">Edit saved password</h3>
+        <div className="flex flex-col gap-4 mt-5">
+          <label className="block text-lg" htmlFor="newpassword">
+            Enter new password
+          </label>
+          <input type="text" hidden name="id" defaultValue={params.id} />
+
           <input
             className="p-1  text-black text-xl bg-white  w-80 rounded border mb-2  focus:outline-accent"
             type="password"
-            name="password"
-            id="password"
+            name="newpassword"
+            id="newpassword"
           />
         </div>
 

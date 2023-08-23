@@ -3,8 +3,9 @@ import { auth, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   const { userId } = auth();
+
   return (
-    <header className="text-slate-200 shadow-lg shadow-primary/70 text-xl">
+    <header className="text-slate-200 bg-secondary  shadow-md shadow-primary/70 text-xl">
       <div className="container p-6 flex items-center justify-between mx-auto">
         <p>LOGO</p>
         {userId ? (

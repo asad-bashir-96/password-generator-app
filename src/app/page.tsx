@@ -1,9 +1,8 @@
 import PasswordList from "@/components/PasswordList";
-import Header from "@/components/Header";
 import PasswordGenerator from "@/components/PasswordGenerator";
 import generator from "generate-password-ts";
 import { auth } from "@clerk/nextjs";
-export default async function Home() {
+export default function Home() {
   const { userId } = auth();
 
   const initialSettings = {
@@ -16,8 +15,7 @@ export default async function Home() {
   };
   const initialPassword = generator.generate(initialSettings);
   return (
-    <div className="min-h-screen flex  flex-col bg-slate-900">
-      <Header />
+    <div className="min-h-screen relative bg-slate-900  flex  flex-col ">
       <section>
         <PasswordGenerator
           initialSettings={initialSettings}

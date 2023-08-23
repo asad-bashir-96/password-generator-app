@@ -2,17 +2,12 @@
 import { useState } from "react";
 import { Eye, Copy, MoreVertical, Edit, Trash2 } from "react-feather";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Modal from "./Modal";
+import Link from "next/link";
 type SavedPasswordProps = {
   title: string;
   secret: string;
   id: number;
 };
-
-const dropDownList = [
-  { type: "Edit", icon: <Edit className="h-5" /> },
-  { type: "Delete", icon: <Trash2 className="h-5" /> },
-];
 
 export default function SavedPassword({
   title,
@@ -20,9 +15,10 @@ export default function SavedPassword({
   id,
 }: SavedPasswordProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isDropdownOpen, setIsDropDownOpen] = useState(false);
+
   return (
-    <div className="flex  items-center justify-between py-3">
-      <dialog id="modal" />
+    <div className="flex items-center justify-between py-3">
       <p className="select-none">{title}</p>
       <div className="flex ">
         <input
@@ -44,53 +40,30 @@ export default function SavedPassword({
             </button>
           </CopyToClipboard>
 
-          <div className="border relative">
-            <div className="absolute  translate-x-6 translate-y-3">
-              <ul className=" relative transition duration-150 ease-in-out  bg-secondaryDark shadow shadow-accent/70 flex gap-1 w-28 flex-col text-slate-200">
-                {dropDownList.map(({ type, icon }, index) => (
-                  <li
-                    key={index}
-                    className={`flex  transition ease-in duration-150 hover:bg-accent/60 p-2 items-center cursor-pointer justify-between bg-secondaryDark`}
-                  >
-                    {icon}
-                    {type === "Edit" ? (
-                      <Modal showEdit={false} id={id} />
-                    ) : (
-                      <Modal showEdit={false} id={id} />
-                    )}
-
-                    <p>{type}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <button>
-              <MoreVertical className="h-5  transition ease-in-out duration-300  hover:text-accent" />
-            </button>
-          </div>
-
-          {/* <div className="bg-red-500  rounded">
-            <ul className=" relative left-9 transition duration-150 ease-in-out  bg-secondaryDark shadow shadow-accent/70 flex gap-1 w-28 flex-col text-slate-200">
-              {dropDownList.map(({ type, icon }, index) => (
-                <li
-                  key={index}
-                  className={`flex  relative transition ease-in duration-150 hover:bg-accent/60 p-2 items-center cursor-pointer justify-between bg-secondaryDark`}
-                >
-                  {icon}
-                  {type === "Edit" ? (
-                    <Modal showEdit={true} id={id} />
-                  ) : (
-                    <Modal showEdit={false} id={id} />
-                  )}
-
-                  <p>{type}</p>
+          <span className="relative">
+            <ul
+              className={`absolute w-28 ${
+                isDropdownOpen ? "opacity-100" : "hidden"
+              }  translate-x-6 translate-y-2 transition duration-150 ease-in-out  bg-secondaryDark shadow shadow-accent/70 flex gap-3  flex-col text-slate-200`}
+            >
+              <Link href={`/edit-password/${id}`}>
+                <li className="flex  transition ease-in duration-150 hover:bg-accent/60 p-2 items-center cursor-pointer  justify-between">
+                  <Edit className="h-5" />
+                  <p>Edit</p>
                 </li>
-              ))}
+              </Link>
+              <Link href={`/delete-password/${id}`}>
+                <li className="flex  transition ease-in duration-150 hover:bg-accent/60 p-2 items-center cursor-pointer  justify-between">
+                  <Trash2 className="h-5" />
+                  <p>Delete</p>
+                </li>
+              </Link>
             </ul>
-            <button>
-              <MoreVertical className="h-5  transition ease-in-out duration-300  hover:text-accent" />
+
+            <button onClick={() => setIsDropDownOpen((prev) => !prev)}>
+              <MoreVertical className="h-5 transition ease-in-out duration-300  hover:text-accent" />
             </button>
-          </div> */}
+          </span>
         </div>
       </div>
     </div>
