@@ -17,7 +17,7 @@ export default async function PasswordList() {
         <p className="text-xl">{`${data?.length} password saved`}</p>
         <SearchBar />
       </div>
-      <div className="flex flex-col divide-y divide-gray-200 dark:divide-accent/50">
+      <div className="flex flex-col  divide-y divide-gray-200 dark:divide-accent/50">
         {data?.map((entry, index) => (
           <SavedPassword
             id={entry.id}

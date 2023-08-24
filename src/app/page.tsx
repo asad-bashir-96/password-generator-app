@@ -4,6 +4,7 @@ import generator from "generate-password-ts";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import EmptySvg from "../../public/empty.svg";
+import Modal from "@/components/Modal";
 export default function Home() {
   const { userId } = auth();
 
@@ -17,7 +18,7 @@ export default function Home() {
   };
   const initialPassword = generator.generate(initialSettings);
   return (
-    <div className="min-h-screen overflow-x-hidden  text-black dark:text-slate-200 dark:bg-slate-900   flex gap-14  flex-col ">
+    <div className="min-h-screen  relative text-black dark:text-slate-200 dark:bg-slate-900   flex gap-14  flex-col ">
       <section className="container flex flex-col gap-5 items-center mx-auto">
         <h1 className="sm:text-4xl font-light  leading-normal  text-3xl md:text-5xl  text-center my-6   capitalize">
           password management system

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Eye, Copy, MoreVertical, Edit, Trash2, EyeOff } from "react-feather";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Link from "next/link";
+import Dropdown from "./Dropdown";
 type SavedPasswordProps = {
   title: string;
   secret: string;
@@ -15,7 +15,6 @@ export default function SavedPassword({
   id,
 }: SavedPasswordProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isDropdownOpen, setIsDropDownOpen] = useState(false);
 
   return (
     <div className="flex flex-col odd:bg-primary/5 odd:shadow dark:odd:bg-accent/5  rounded-sm gap-2  p-2">
@@ -30,7 +29,7 @@ export default function SavedPassword({
           defaultValue={secret}
         />
 
-        <div className="flex  items-center  gap-1">
+        <div className="flex  justify-between  items-center  gap-1">
           {isPasswordVisible ? (
             <button>
               <EyeOff
@@ -53,12 +52,11 @@ export default function SavedPassword({
             </button>
           </CopyToClipboard>
 
-          <button
-            className=""
-            onClick={() => setIsDropDownOpen((prev) => !prev)}
-          >
-            <MoreVertical className="h-5 transition ease-in-out duration-300  hover:text-accent" />
-            <ul
+          <button>
+            <Dropdown />
+          </button>
+          {/* <button onClick={() => setIsDropDownOpen((prev) => !prev)}></button> */}
+          {/* <ul
               className={`absolute w-28 ${
                 isDropdownOpen ? "opacity-100" : "hidden"
               }  translate-x-6 translate-y-2 transition duration-150 ease-in-out  bg-secondaryDark shadow shadow-accent/70 flex gap-3  flex-col text-slate-200`}
@@ -75,8 +73,7 @@ export default function SavedPassword({
                   <p>Delete</p>
                 </li>
               </Link>
-            </ul>
-          </button>
+            </ul> */}
         </div>
       </div>
     </div>

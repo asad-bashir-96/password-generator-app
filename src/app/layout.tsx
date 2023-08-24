@@ -25,7 +25,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${poppins.variable} font-sans  bg-neutral-100 dark:bg-slate-900  `}
+          className={`${poppins.variable} font-sans overflow-x-hidden    bg-neutral-100 dark:bg-slate-900  `}
         >
           <Header />
           {children}
