@@ -9,12 +9,15 @@ export default async function PasswordList() {
   const data = await getAllPasswordsByUserId(String(userId));
 
   return (
-    <div className="flex gap-5 p-4   mb-20  rounded bg-secondary dark:text-slate-200  flex-col w-4/5 max-w-4xl">
+    <div className="flex gap-5 px-8 py-10 shadow-md bg-white dark:border-accent/50 dark:shadow-slate-900 border  rounded-lg dark:bg-secondary  flex-col w-4/5 max-w-4xl">
+      <h2 className="text-center mb-3 font-extralight text-2xl">
+        manage saved passwords
+      </h2>
       <div className="flex justify-between">
-        <p>{`${data?.length} password saved`}</p>
+        <p className="text-xl">{`${data?.length} password saved`}</p>
         <SearchBar />
       </div>
-      <div className="divide-y">
+      <div className="flex flex-col divide-y divide-gray-200 dark:divide-accent/50">
         {data?.map((entry, index) => (
           <SavedPassword
             id={entry.id}

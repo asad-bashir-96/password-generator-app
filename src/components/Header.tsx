@@ -1,20 +1,21 @@
 import Link from "next/link";
 import { auth, UserButton } from "@clerk/nextjs";
-
 export default function Header() {
   const { userId } = auth();
 
   return (
-    <header className="text-slate-200 bg-secondary  shadow-md shadow-primary/70 text-xl">
+    <header className="text-slate-200 bg-accent dark:bg-secondary shadow-md shadow-primary/70 md:text-2xl text-xl">
       <div className="container p-6 flex items-center justify-between mx-auto">
-        <p>LOGO</p>
+        <Link href={"/"}>
+          <p>LOGO</p>
+        </Link>
         {userId ? (
           <UserButton afterSignOutUrl="/" />
         ) : (
           <ul className="flex items-center gap-6">
             <Link
               href="/sign-in"
-              className="cursor-pointer transition ease-in duration-150 hover:text-accent"
+              className="cursor-pointer transition ease-in duration-150 hover:text-primary"
             >
               Sign In
             </Link>

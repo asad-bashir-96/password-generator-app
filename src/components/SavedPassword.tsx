@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Eye, Copy, MoreVertical, Edit, Trash2 } from "react-feather";
+import { Eye, Copy, MoreVertical, Edit, Trash2, EyeOff } from "react-feather";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Link from "next/link";
 type SavedPasswordProps = {
@@ -18,29 +18,46 @@ export default function SavedPassword({
   const [isDropdownOpen, setIsDropDownOpen] = useState(false);
 
   return (
-    <div className="flex items-center justify-between py-3">
-      <p className="select-none">{title}</p>
-      <div className="flex ">
+    <div className="flex flex-col odd:bg-primary/5 odd:shadow dark:odd:bg-accent/5  rounded-sm gap-2  p-2">
+      <p className="select-none font-extralight text-xl capitalize  ">
+        {title}
+      </p>
+
+      <div className="flex justify-between  w-full  ">
         <input
-          className="bg-transparent focus:outline-none text-right"
+          className="bg-transparent flex w-full rounded   focus:outline-none "
           type={isPasswordVisible ? "text" : "password"}
           defaultValue={secret}
         />
 
-        <div className="flex items-center ml-6 gap-1">
-          <button>
-            <Eye
-              onClick={() => setIsPasswordVisible((prev) => !prev)}
-              className="h-5  transition ease-in-out duration-300  hover:text-accent"
-            />
-          </button>
+        <div className="flex  items-center  gap-1">
+          {isPasswordVisible ? (
+            <button>
+              <EyeOff
+                onClick={() => setIsPasswordVisible((prev) => !prev)}
+                className="h-5  transition ease-in-out duration-300  hover:text-accent"
+              />
+            </button>
+          ) : (
+            <button>
+              <Eye
+                onClick={() => setIsPasswordVisible((prev) => !prev)}
+                className="h-5  transition ease-in-out duration-300  hover:text-accent"
+              />
+            </button>
+          )}
+
           <CopyToClipboard onCopy={() => console.log("copied")} text={secret}>
             <button>
               <Copy className="h-5  transition ease-in-out duration-300  hover:text-accent" />
             </button>
           </CopyToClipboard>
 
-          <span className="relative">
+          <button
+            className=""
+            onClick={() => setIsDropDownOpen((prev) => !prev)}
+          >
+            <MoreVertical className="h-5 transition ease-in-out duration-300  hover:text-accent" />
             <ul
               className={`absolute w-28 ${
                 isDropdownOpen ? "opacity-100" : "hidden"
@@ -59,11 +76,7 @@ export default function SavedPassword({
                 </li>
               </Link>
             </ul>
-
-            <button onClick={() => setIsDropDownOpen((prev) => !prev)}>
-              <MoreVertical className="h-5 transition ease-in-out duration-300  hover:text-accent" />
-            </button>
-          </span>
+          </button>
         </div>
       </div>
     </div>

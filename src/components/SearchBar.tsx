@@ -17,7 +17,7 @@ export default function SearchBar() {
         placeholder="Search passwords"
         id="search"
         type="search"
-        className="border-b  w-full transition duration-150 ease-in bg-transparent border-neutral-400 focus:border-accent placeholder:text-neutral-400 outline-none"
+        className="border-b  w-full transition duration-150 ease-in bg-transparent border-neutral-400 focus:border-primary dark:focus:border-accent placeholder:text-neutral-400 outline-none"
       />
     </div>
   );

@@ -110,18 +110,15 @@ export default function PasswordGenerator({
   }
 
   return (
-    <div className="container flex flex-col gap-5 items-center mx-auto">
-      <h1 className="text-5xl my-6 font-normal  capitalize">
-        password management system
-      </h1>
-      <div className="w-4/5 max-w-4xl p-4 rounded bg-secondary">
+    <>
+      <div className="w-4/5 max-w-4xl    py-10 rounded-lg shadow-md  border-gray-200 dark:border-accent/50 dark:shadow-slate-900 border bg-white dark:bg-secondary">
         <div className="w-4/5 mx-auto ">
-          <h2 className="text-center mb-10 text-2xl">password settings</h2>
-          <div className="border-b items-center justify-between pb-1  flex text-2xl">
-            <p className=" cursor-pointer flex-grow">{password}</p>
+          <h2 className="text-center font-extralight mb-10 text-2xl">generate password</h2>
+          <div className="  items-center justify-between pb-1 border rounded-md dark:border-accent border-gray-200 shadow-sm p-1  flex text-2xl">
+            <p className=" overflow-x-hidden flex-grow">{password}</p>
 
-            <button onClick={generatePassword}>
-              <RefreshCw className="h-5 transition ease-in-out duration-700 hover:rotate-180  hover:text-accent" />
+            <button className=" " onClick={generatePassword}>
+              <RefreshCw className="h-5 bg-transparent  transition ease-in-out duration-700 hover:rotate-180  hover:text-accent" />
             </button>
           </div>
           <div className="flex w-full justify-end">
@@ -129,7 +126,7 @@ export default function PasswordGenerator({
               onCopy={() => console.log("copied")}
               text={password}
             >
-              <button className="bg-primary mt-4 relative  hover:bg-primary/80 transition ease-in duration-100   capitalize py-3 px-2 rounded text-white">
+              <button className="bg-primary   text-white mt-6 relative  hover:bg-primary/80 transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded">
                 copy password
               </button>
             </CopyToClipboard>
@@ -138,20 +135,18 @@ export default function PasswordGenerator({
             <p className=" ">{`Length (${settings.length})`}</p>
             <Slider settings={settings} setSettings={setSettings} />
 
-            <ul className="flex flex-wrap gap-y-6 justify-between">
+            <ul className="flex flex-wrap gap-6 justify-between">
               <li className="flex gap-2 items-center  ">
                 <Checkbox.Root
                   disabled={isDisabled.numbers}
                   checked={settings.numbers}
                   onCheckedChange={handleNumberChange}
-                  className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
+                  className=" flex h-5 w-5 bg-primary p-3   items-center justify-center rounded shadow-sm   border-gray-200/70 border  outline-none"
                 >
                   <Checkbox.Indicator>
                     <Check
-                      className={`transition duration-150 ease-in ${
-                        isDisabled.numbers
-                          ? "bg-accent text-white"
-                          : "text-black"
+                      className={`transition text-white duration-150 ease-in ${
+                        isDisabled.numbers ? "bg-accent " : ""
                       }`}
                     />
                   </Checkbox.Indicator>
@@ -169,14 +164,12 @@ export default function PasswordGenerator({
                   disabled={isDisabled.lowerCase}
                   checked={settings.lowercase}
                   onCheckedChange={handleLowerCaseChange}
-                  className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
+                  className=" flex h-5 w-5 p-3  bg-primary   items-center justify-center rounded shadow-sm  border-gray-200/70 border  outline-none"
                 >
                   <Checkbox.Indicator>
                     <Check
-                      className={`transition duration-150 ease-in ${
-                        isDisabled.lowerCase
-                          ? "bg-accent text-white"
-                          : "text-black"
+                      className={`transition text-white duration-150 ease-in ${
+                        isDisabled.lowerCase ? "bg-accent " : ""
                       }`}
                     />
                   </Checkbox.Indicator>
@@ -194,14 +187,12 @@ export default function PasswordGenerator({
                   disabled={isDisabled.upperCase}
                   checked={settings.uppercase}
                   onCheckedChange={handleUpperCaseChange}
-                  className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
+                  className=" flex h-5 w-5 bg-primary p-3    items-center justify-center rounded shadow-sm  border-gray-200/70 border  outline-none"
                 >
                   <Checkbox.Indicator>
                     <Check
-                      className={`transition duration-150 ease-in ${
-                        isDisabled.upperCase
-                          ? "bg-accent text-white"
-                          : "text-black"
+                      className={`transition text-white duration-150 ease-in ${
+                        isDisabled.upperCase ? "bg-accent " : ""
                       }`}
                     />
                   </Checkbox.Indicator>
@@ -219,14 +210,12 @@ export default function PasswordGenerator({
                   disabled={isDisabled.symbols}
                   checked={settings.symbols}
                   onCheckedChange={handleSymbloChange}
-                  className=" flex h-5 w-5  items-center justify-center rounded-sm bg-white outline-none"
+                  className=" flex h-5 w-5 p-3  bg-primary   items-center justify-center rounded shadow-sm    border-gray-200/70 border  outline-none"
                 >
                   <Checkbox.Indicator>
                     <Check
-                      className={`transition duration-150 ease-in ${
-                        isDisabled.symbols
-                          ? "bg-accent text-white"
-                          : "text-black"
+                      className={`transition text-white duration-150 ease-in ${
+                        isDisabled.symbols ? "bg-accent " : ""
                       }`}
                     />
                   </Checkbox.Indicator>
@@ -243,6 +232,6 @@ export default function PasswordGenerator({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

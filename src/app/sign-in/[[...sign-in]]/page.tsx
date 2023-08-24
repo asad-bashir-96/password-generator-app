@@ -2,8 +2,10 @@ import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
   return (
-    <div className="w-full min-h-screen bg-slate-900 flex justify-center items-center">
-      <SignIn signUpUrl="/sign-up" />
+    <div className="w-full   flex justify-center items-center">
+      <div className="p-20">
+        <SignIn signUpUrl="/sign-up" />
+      </div>
     </div>
   );
 }

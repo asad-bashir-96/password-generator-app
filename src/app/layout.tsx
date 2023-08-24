@@ -1,10 +1,15 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["100", "200", "300", "400", "500"],
+  variable: "--font-poppins",
+});
 
 export const metadata: Metadata = {
   title: "Password Manager App",
@@ -19,7 +24,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body
+          className={`${poppins.variable} font-sans  bg-neutral-100 dark:bg-slate-900  `}
+        >
           <Header />
           {children}
         </body>
