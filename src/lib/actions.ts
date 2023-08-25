@@ -1,7 +1,11 @@
 "use server";
 import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
-import { insertPassword, updatePasswordById } from "./controllers";
+import {
+  insertPassword,
+  updatePasswordById,
+  deletePasswordById,
+} from "./controllers";
+import { revalidatePath } from "next/cache";
 const { userId } = auth();
 
 export async function addPassword(data: FormData) {
@@ -12,7 +16,7 @@ export async function addPassword(data: FormData) {
     console.log("password has been added to database");
   }
 
-  redirect("/");
+  revalidatePath("/");
 }
 
 export async function editPassword(data: FormData) {
@@ -22,5 +26,14 @@ export async function editPassword(data: FormData) {
     await updatePasswordById(id, password);
     console.log("password has been updated");
   }
-  redirect("/");
+  revalidatePath("/");
+}
+
+export async function deletePassword(data: FormData) {
+  const id = Number(data.get("id"));
+  if (userId) {
+    await deletePasswordById(id);
+    console.log("password was deleted");
+  }
+  revalidatePath("/");
 }

@@ -49,12 +49,12 @@ export async function updatePasswordById(id: number, password: string) {
   }
 }
 
-// export async function deletePasswordById(id: number) {
-//   try {
-//     await db.delete(entries).where(eq(entries.id, id));
-//     console.log("deleted password");
-//   } catch (e) {
-//     console.log("error has occured****************");
-//     console.log(e);
-//   }
-// }
+export async function deletePasswordById(id: number) {
+  try {
+    await db.delete(entries).where(eq(entries.id, id));
+    console.log("deleted password");
+  } catch (e) {
+    console.log("error has occured****************");
+    console.log(e);
+  }
+}

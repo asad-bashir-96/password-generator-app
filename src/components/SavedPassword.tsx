@@ -52,9 +52,8 @@ export default function SavedPassword({
             </button>
           </CopyToClipboard>
 
-          <button>
-            <Dropdown />
-          </button>
+          <Dropdown id={id} />
+
           {/* <button onClick={() => setIsDropDownOpen((prev) => !prev)}></button> */}
           {/* <ul
               className={`absolute w-28 ${

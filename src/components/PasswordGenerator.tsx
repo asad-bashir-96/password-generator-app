@@ -113,8 +113,10 @@ export default function PasswordGenerator({
     <>
       <div className="w-4/5 max-w-4xl    py-10 rounded-lg shadow-md  border-gray-200 dark:border-accent/50 dark:shadow-slate-900 border bg-white dark:bg-secondary">
         <div className="w-4/5 mx-auto ">
-          <h2 className="text-center font-extralight mb-10 text-2xl">generate password</h2>
-          <div className="  items-center justify-between pb-1 border rounded-md dark:border-accent border-gray-200 shadow-sm p-1  flex text-2xl">
+          <h2 className="text-center font-extralight mb-10 text-2xl">
+            generate password
+          </h2>
+          <div className="  items-center justify-between pb-1 border  rounded-md dark:border-accent border-gray-200 shadow p-1  flex text-2xl">
             <p className=" overflow-x-hidden flex-grow">{password}</p>
 
             <button className=" " onClick={generatePassword}>

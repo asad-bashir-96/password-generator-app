@@ -1,4 +1,5 @@
-import NewPasswordForm from "./NewPasswordForm";
+import NewPasswordForm from "./forms/NewPasswordForm";
+import * as Dialog from "@radix-ui/react-dialog";
 
 type ModalProps = {
   type: "edit" | "delete";

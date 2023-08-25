@@ -1,27 +1,29 @@
 "use client";
-import { addPassword } from "@/lib/actions";
+import { editPassword } from "@/lib/actions";
 import Link from "next/link";
-export default function NewPasswordForm() {
+
+type EditPasswordFormProps = {
+  id: number;
+};
+export default function EditPasswordForm({ id }: EditPasswordFormProps) {
   return (
     <form
-      action={addPassword}
-      className="bg-secondaryDark shadow-md shadow-accent/40  z-10 text-slate-200 w-[500px] modal-box"
+      action={editPassword}
+      className="dark:bg-secondaryDark text-black bg-white shadow-lg  z-10 dark:text-slate-200 py-10 px-20 rounded-lg"
     >
-      <h3 className="text-3xl">Create new password</h3>
-      <div className="flex flex-col gap-2 mt-5">
-        <label className="text-xl block">Title</label>
-        <input
-          className="p-1  text-black text-xl bg-white  w-80 rounded border mb-2  focus:outline-accent"
-          type="text"
-          name="title"
-          id="title"
-        />
-        <label className="text-xl block">Password</label>
+      <h3 className="text-3xl">Edit saved password</h3>
+      <div className="flex flex-col gap-4 mt-5">
+        <label className="block text-lg" htmlFor="newpassword">
+          Enter new password
+        </label>
+
+        <input type="text" hidden name="id" defaultValue={id} />
+
         <input
           className="p-1  text-black text-xl bg-white  w-80 rounded border mb-2  focus:outline-accent"
           type="password"
-          name="password"
-          id="password"
+          name="newpassword"
+          id="newpassword"
         />
       </div>
 

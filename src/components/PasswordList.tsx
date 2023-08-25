@@ -30,7 +30,7 @@ export default async function PasswordList() {
 
       <Link
         href="/new-password"
-        className="bg-primary mt-4 relative text-center hover:bg-primary/80 transition ease-in duration-100  capitalize py-3 px-2 rounded text-white"
+        className="bg-primary dark:hover:bg-accent/5 dark:hover:border-accent/50 dark:hover:text-primary dark:border-accent dark:bg-accent mt-4 relative text-center hover:bg-primary/5 hover:text-accent border border-primary  transition ease-in duration-100  capitalize py-3 px-2 rounded text-slate-200"
       >
         Add New Password
       </Link>

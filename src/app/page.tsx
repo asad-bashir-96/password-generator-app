@@ -5,6 +5,8 @@ import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import EmptySvg from "../../public/empty.svg";
 import Modal from "@/components/Modal";
+import EditPasswordForm from "@/components/forms/EditPasswordForm";
+import NewPasswordForm from "@/components/forms/NewPasswordForm";
 export default function Home() {
   const { userId } = auth();
 
