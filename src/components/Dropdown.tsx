@@ -45,7 +45,7 @@ export default function Dropdown({ id }: DropdownProps) {
     return (
       <form
         action={onEditSubmit}
-        className="dark:bg-secondaryDark text-black bg-white shadow-lg  z-10 dark:text-slate-200 py-10 px-20 rounded-lg"
+        className="dark:bg-secondaryDark outline-none border-gray-200 dark:border-accent/50 border  bg-white  shadow-md shadow-accent/40   dark:text-slate-200  py-10 px-16 rounded-lg"
       >
         <h3 className="text-3xl">Edit saved password</h3>
         <div className="flex flex-col gap-4 mt-5">
@@ -63,9 +63,16 @@ export default function Dropdown({ id }: DropdownProps) {
           />
         </div>
 
-        <div className="flex justify-end  mt-5 ">
-          <button className="p-3 rounded transition duration-150 ease-in hover:text-accent bg-primary text-slate-200">
-            Submit
+        <div className="flex justify-between mt-5 ">
+          <button
+            onClick={() => setIsDialogOpen(false)}
+            type="button"
+            className="w-20 p-3 hover:text-primary transition duration-150 ease-in rounded bg-accent text-slate-200"
+          >
+            Cancel
+          </button>
+          <button className="w-20 rounded transition duration-150 ease-in hover:text-accent bg-primary text-slate-200">
+            Save
           </button>
         </div>
       </form>
@@ -76,7 +83,7 @@ export default function Dropdown({ id }: DropdownProps) {
     return (
       <form
         action={onDeleteSubmit}
-        className="bg-secondaryDark shadow-lg  z-10 text-slate-200 modal-box"
+        className="dark:bg-secondaryDark border-gray-200 dark:border-accent/50 border  bg-white  shadow-md shadow-accent/40   dark:text-slate-200  py-10 px-16 rounded-lg"
       >
         <h3 className="text-3xl">Delete password</h3>
         <div className="flex flex-col gap-4 mt-5">

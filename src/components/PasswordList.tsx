@@ -3,7 +3,7 @@ import SavedPassword from "./SavedPassword";
 import { getAllPasswordsByUserId } from "@/lib/controllers";
 import { auth } from "@clerk/nextjs";
 import SearchBar from "./SearchBar";
-import AddPasswordModal from "./forms/AddPasswordModal";
+import AddPasswordModal from "./AddPasswordModal";
 export default async function PasswordList() {
   const { userId } = auth();
   const data = await getAllPasswordsByUserId(String(userId));

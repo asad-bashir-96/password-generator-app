@@ -5,6 +5,7 @@ import generator from "generate-password-ts";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Slider from "./Slider";
+import { useToast } from "rc-toastr";
 
 export type Settings = {
   length: number;
@@ -26,6 +27,8 @@ export default function PasswordGenerator({
 }: PasswordGeneratorProps) {
   const [password, setPassword] = useState(initialPassword);
   const [settings, setSettings] = useState(initialSettings);
+  const { toast } = useToast();
+
   const [isDisabled, setIsDisabled] = useState({
     numbers: false,
     lowerCase: false,
@@ -41,6 +44,10 @@ export default function PasswordGenerator({
   function generatePassword() {
     const password = generator.generate(settings);
     setPassword(password);
+  }
+
+  function onCopy() {
+    toast.success("copied");
   }
 
   function checkIfDisabled() {
@@ -128,7 +135,10 @@ export default function PasswordGenerator({
               onCopy={() => console.log("copied")}
               text={password}
             >
-              <button className="bg-primary   text-white mt-6 relative  hover:bg-primary/80 transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded">
+              <button
+                onClick={onCopy}
+                className="bg-primary   text-white mt-6 relative  hover:bg-primary/80 transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded"
+              >
                 copy password
               </button>
             </CopyToClipboard>
@@ -143,7 +153,7 @@ export default function PasswordGenerator({
                   disabled={isDisabled.numbers}
                   checked={settings.numbers}
                   onCheckedChange={handleNumberChange}
-                  className=" flex h-5 w-5 bg-primary p-3   items-center justify-center rounded shadow-sm   border-gray-200/70 border  outline-none"
+                  className=" flex h-5 w-5 bg-primary p-3   items-center justify-center rounded shadow-sm   border-gray-200/70 border  "
                 >
                   <Checkbox.Indicator>
                     <Check
@@ -166,7 +176,7 @@ export default function PasswordGenerator({
                   disabled={isDisabled.lowerCase}
                   checked={settings.lowercase}
                   onCheckedChange={handleLowerCaseChange}
-                  className=" flex h-5 w-5 p-3  bg-primary   items-center justify-center rounded shadow-sm  border-gray-200/70 border  outline-none"
+                  className=" flex h-5 w-5 p-3  bg-primary   items-center justify-center rounded shadow-sm  border-gray-200/70 border  "
                 >
                   <Checkbox.Indicator>
                     <Check
@@ -189,7 +199,7 @@ export default function PasswordGenerator({
                   disabled={isDisabled.upperCase}
                   checked={settings.uppercase}
                   onCheckedChange={handleUpperCaseChange}
-                  className=" flex h-5 w-5 bg-primary p-3    items-center justify-center rounded shadow-sm  border-gray-200/70 border  outline-none"
+                  className=" flex h-5 w-5 bg-primary p-3    items-center justify-center rounded shadow-sm  border-gray-200/70 border  "
                 >
                   <Checkbox.Indicator>
                     <Check
@@ -212,7 +222,7 @@ export default function PasswordGenerator({
                   disabled={isDisabled.symbols}
                   checked={settings.symbols}
                   onCheckedChange={handleSymbloChange}
-                  className=" flex h-5 w-5 p-3  bg-primary   items-center justify-center rounded shadow-sm    border-gray-200/70 border  outline-none"
+                  className=" flex h-5 w-5 p-3  bg-primary   items-center justify-center rounded shadow-sm    border-gray-200/70 border  "
                 >
                   <Checkbox.Indicator>
                     <Check

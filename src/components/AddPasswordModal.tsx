@@ -27,7 +27,7 @@ export default function AddPasswordModal() {
       }
     >
       <Dialog.Overlay className="fixed flex justify-center items-center  inset-0 z-50 bg-black bg-opacity-50">
-        <Dialog.Content className="border-red-500">
+        <Dialog.Content>
           <form
             action={onSubmit}
             className="dark:bg-secondaryDark  border-gray-200 dark:border-accent/50 border  bg-white  shadow-md shadow-accent/40   dark:text-slate-200  py-10 px-16 rounded-lg"
