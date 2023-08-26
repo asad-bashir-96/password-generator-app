@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useTransition, useEffect } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Edit, MoreVertical } from "react-feather";
@@ -13,6 +13,24 @@ type DropdownProps = {
 export default function Dropdown({ id }: DropdownProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [type, setType] = useState<DialogType>();
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    if (isPending) return;
+    setIsDialogOpen(false);
+  }, [isPending]);
+
+  async function onDeleteSubmit(formData: FormData) {
+    startTransition(() => {
+      deletePassword(formData);
+    });
+  }
+
+  async function onEditSubmit(formData: FormData) {
+    startTransition(() => {
+      editPassword(formData);
+    });
+  }
 
   function Form() {
     switch (type) {
@@ -26,7 +44,7 @@ export default function Dropdown({ id }: DropdownProps) {
   function EditPasswordForm({ id }: DropdownProps) {
     return (
       <form
-        action={editPassword}
+        action={onEditSubmit}
         className="dark:bg-secondaryDark text-black bg-white shadow-lg  z-10 dark:text-slate-200 py-10 px-20 rounded-lg"
       >
         <h3 className="text-3xl">Edit saved password</h3>
@@ -46,13 +64,6 @@ export default function Dropdown({ id }: DropdownProps) {
         </div>
 
         <div className="flex justify-end  mt-5 ">
-          {/* <Link
-          href="/"
-          type="button"
-          className="w-20 p-3 hover:text-primary transition duration-150 ease-in rounded bg-accent text-slate-200"
-        >
-          Cancel
-        </Link> */}
           <button className="p-3 rounded transition duration-150 ease-in hover:text-accent bg-primary text-slate-200">
             Submit
           </button>
@@ -64,7 +75,7 @@ export default function Dropdown({ id }: DropdownProps) {
   function DeletePasswordForm({ id }: DropdownProps) {
     return (
       <form
-        action={deletePassword}
+        action={onDeleteSubmit}
         className="bg-secondaryDark shadow-lg  z-10 text-slate-200 modal-box"
       >
         <h3 className="text-3xl">Delete password</h3>
@@ -113,12 +124,12 @@ export default function Dropdown({ id }: DropdownProps) {
         <MoreVertical className="h-5 cursor-pointer transition ease-in-out duration-300 hover:text-accent" />
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content className="border translate-x-16 transition w-28 duration-150 ease-in-out rounded bg-secondaryDark shadow shadow-accent/70 flex flex-col text-slate-200">
+      <DropdownMenu.Content className="  translate-y-3 transition w-28 duration-150 ease-in-out rounded bg-secondaryDark shadow shadow-accent/70 flex flex-col text-slate-200">
         <DropdownMenu.Group>
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("edit")}
-              className="flex py-2 transition ease-in px-2 duration-150 hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex rounded py-4 transition ease-in px-2 duration-150 hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Edit</p>
@@ -127,27 +138,19 @@ export default function Dropdown({ id }: DropdownProps) {
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("delete")}
-              className="flex py-2 transition ease-in px-2 duration-150 hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex rounded py-4 transition ease-in px-2 duration-150 hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Delete</p>
             </li>
           </DropdownMenu.Item>
         </DropdownMenu.Group>
-        {/* 
-        <DropdownMenu.Item className="outline-none">
-          <li className="flex py-2 transition ease-in px-2 duration-150 hover:bg-accent/60 items-center cursor-pointer justify-between">
-            <Trash2 className="h-5" />
-            <p>Delete</p>
-          </li>
-        </DropdownMenu.Item> */}
       </DropdownMenu.Content>
 
       <Dialog.Root open={isDialogOpen} onOpenChange={closeDialog}>
         <Dialog.Overlay className="fixed flex justify-center items-center  inset-0 z-50 bg-black bg-opacity-50">
           <Dialog.Content>
             <Form />
-            {/* <NewPasswordForm /> */}
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Root>

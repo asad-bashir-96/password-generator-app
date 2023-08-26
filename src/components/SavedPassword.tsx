@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Eye, Copy, MoreVertical, Edit, Trash2, EyeOff } from "react-feather";
+import { Eye, Copy, EyeOff } from "react-feather";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Dropdown from "./Dropdown";
 type SavedPasswordProps = {
@@ -53,26 +53,6 @@ export default function SavedPassword({
           </CopyToClipboard>
 
           <Dropdown id={id} />
-
-          {/* <button onClick={() => setIsDropDownOpen((prev) => !prev)}></button> */}
-          {/* <ul
-              className={`absolute w-28 ${
-                isDropdownOpen ? "opacity-100" : "hidden"
-              }  translate-x-6 translate-y-2 transition duration-150 ease-in-out  bg-secondaryDark shadow shadow-accent/70 flex gap-3  flex-col text-slate-200`}
-            >
-              <Link href={`/edit-password/${id}`}>
-                <li className="flex  transition ease-in duration-150 hover:bg-accent/60 p-2 items-center cursor-pointer  justify-between">
-                  <Edit className="h-5" />
-                  <p>Edit</p>
-                </li>
-              </Link>
-              <Link href={`/delete-password/${id}`}>
-                <li className="flex  transition ease-in duration-150 hover:bg-accent/60 p-2 items-center cursor-pointer  justify-between">
-                  <Trash2 className="h-5" />
-                  <p>Delete</p>
-                </li>
-              </Link>
-            </ul> */}
         </div>
       </div>
     </div>
