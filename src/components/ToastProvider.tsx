@@ -8,14 +8,6 @@ type TestProps = {
   children: ReactElement;
 };
 
-const config = {
-  duration: 2,
-  position: "top-right",
-  pauseOnHover: false,
-  autoClose: true,
-  showProgressBar: false,
-  toastBackgroundColor: "red",
-};
 export default function ToastProvider({ children }: TestProps) {
   return (
     <ToastContext

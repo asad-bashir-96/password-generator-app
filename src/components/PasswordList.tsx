@@ -1,9 +1,9 @@
-import Link from "next/link";
 import SavedPassword from "./SavedPassword";
 import { getAllPasswordsByUserId } from "@/lib/controllers";
 import { auth } from "@clerk/nextjs";
 import SearchBar from "./SearchBar";
 import AddPasswordModal from "./AddPasswordModal";
+import SavedPasswordsWrapper from "./SavedPasswordsWrapper";
 export default async function PasswordList() {
   const { userId } = auth();
   const data = await getAllPasswordsByUserId(String(userId));
@@ -17,7 +17,7 @@ export default async function PasswordList() {
         <p className="sm:text-xl text-lg font-extralight">{`${data?.length} password saved`}</p>
         <SearchBar />
       </div>
-      <div className="flex flex-col  divide-y divide-gray-200 dark:divide-accent/50">
+      <SavedPasswordsWrapper>
         {data?.map((entry, index) => (
           <SavedPassword
             id={entry.id}
@@ -26,15 +26,9 @@ export default async function PasswordList() {
             title={entry.title}
           />
         ))}
-      </div>
+      </SavedPasswordsWrapper>
 
       <AddPasswordModal />
-      {/* <Link
-        href="/new-password"
-        className="bg-primary dark:hover:bg-accent/5 dark:hover:border-accent/50 dark:hover:text-primary dark:border-accent dark:bg-accent/70 mt-4 relative text-center hover:bg-primary/5 hover:text-accent border border-primary  transition ease-in duration-100  capitalize py-3 px-2 rounded text-slate-200"
-      >
-        Add New Password
-      </Link> */}
     </div>
   );
 }
