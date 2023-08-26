@@ -131,12 +131,12 @@ export default function Dropdown({ id }: DropdownProps) {
         <MoreVertical className="h-5 cursor-pointer transition ease-in-out duration-300 hover:text-accent" />
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content className="  translate-y-3 transition w-28 duration-150 ease-in-out rounded bg-secondaryDark shadow shadow-accent/70 flex flex-col text-slate-200">
+      <DropdownMenu.Content className="  translate-y-3 transition w-28 duration-150 ease-in-out rounded bg-white dark:bg-secondaryDark shadow shadow-gray-400 dark:shadow-accent/70 flex flex-col text-black dark:text-slate-200">
         <DropdownMenu.Group>
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("edit")}
-              className="flex rounded py-4 transition ease-in px-2 duration-150 hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Edit</p>
@@ -145,7 +145,7 @@ export default function Dropdown({ id }: DropdownProps) {
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("delete")}
-              className="flex rounded py-4 transition ease-in px-2 duration-150 hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Delete</p>
