@@ -24,6 +24,7 @@ export default function SavedPassword({
 
       <div className="flex justify-between  w-full  ">
         <input
+          disabled
           className="bg-transparent flex w-full rounded   focus:outline-none "
           type={isPasswordVisible ? "text" : "password"}
           defaultValue={secret}
