@@ -22,8 +22,9 @@ export async function addPassword(data: FormData) {
 export async function editPassword(data: FormData) {
   const id = Number(data.get("id"));
   const password = String(data.get("newpassword"));
+  const title = String(data.get("title"));
   if (userId) {
-    await updatePasswordById(id, password);
+    await updatePasswordById(id, password, title);
     console.log("password has been updated");
   }
   revalidatePath("/");

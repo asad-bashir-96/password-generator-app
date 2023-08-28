@@ -18,7 +18,9 @@ export default function Slider({ settings, setSettings }: SliderProps) {
       max={20}
       value={settings.length}
       onChange={handleChange}
-      className="range mt-4 mb-10 range-sm range-primary"
+      className={
+        "range mt-4 mb-10 range-sm dark:range-secondary  range-primary"
+      }
     />
   );
 }

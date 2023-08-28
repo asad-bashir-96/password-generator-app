@@ -49,31 +49,37 @@ export default function Dropdown({ id }: DropdownProps) {
       >
         <h3 className="text-3xl">Edit saved password</h3>
         <div className="flex flex-col gap-4 mt-5">
-          <label className="block text-lg" htmlFor="newpassword">
-            Enter new password
+          <label className="block text-lg" htmlFor="title">
+            Edit Title
           </label>
 
-          <input type="text" hidden name="id" defaultValue={id} />
+          <input
+            required
+            className="p-1 w-full shadow outline-none ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800   rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
+            type="text"
+            name="title"
+            id="title"
+          />
+
+          <label className="block text-lg" htmlFor="newpassword">
+            Edit Password
+          </label>
 
           <input
-            className="p-1  text-black text-xl bg-white  w-80 rounded border mb-2  focus:outline-accent"
+            required
+            className="p-1 w-full shadow outline-none ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800   rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
             type="password"
             name="newpassword"
             id="newpassword"
           />
-        </div>
 
-        <div className="flex justify-between mt-5 ">
-          <button
-            onClick={() => setIsDialogOpen(false)}
-            type="button"
-            className="w-20 p-3 hover:text-primary transition duration-150 ease-in rounded bg-accent text-slate-200"
-          >
-            Cancel
-          </button>
-          <button className="w-20 rounded transition duration-150 ease-in hover:text-accent bg-primary text-slate-200">
-            Save
-          </button>
+          <input type="text" hidden name="id" defaultValue={id} />
+
+          <div className="flex justify-end">
+            <button className="bg-primary w-20 hover:text-primary hover:bg-accent/5  border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent  dark:hover:bg-accent/5 dark:hover:text-primary  text-white  relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded">
+              Edit
+            </button>
+          </div>
         </div>
       </form>
     );
@@ -86,24 +92,17 @@ export default function Dropdown({ id }: DropdownProps) {
         className="dark:bg-secondaryDark border-gray-200 dark:border-accent/50 border  bg-white  shadow-md shadow-accent/40   dark:text-slate-200  py-10 px-16 rounded-lg"
       >
         <h3 className="text-3xl">Delete password</h3>
-        <div className="flex flex-col gap-4 mt-5">
+        <div className="flex flex-col gap-6 mt-5">
           <p className="text-xl">
             Are you sure you want to delete this password?
           </p>
-          <input type="text" hidden name="id" defaultValue={id} />
-        </div>
 
-        <div className="flex justify-between mt-5 ">
-          <button
-            onClick={() => setIsDialogOpen(false)}
-            type="button"
-            className="w-20 p-3 hover:text-primary transition duration-150 ease-in rounded bg-accent text-slate-200"
-          >
-            Cancel
-          </button>
-          <button className="w-20 rounded transition duration-150 ease-in hover:text-accent bg-primary text-slate-200">
-            Delete
-          </button>
+          <div className="flex justify-end">
+            <button className="bg-primary w-20 hover:text-primary hover:bg-accent/5  border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent  dark:hover:bg-accent/5 dark:hover:text-primary  text-white  relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded">
+              Delete
+            </button>
+          </div>
+          <input type="text" hidden name="id" defaultValue={id} />
         </div>
       </form>
     );
@@ -128,7 +127,7 @@ export default function Dropdown({ id }: DropdownProps) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <MoreVertical className="h-5 cursor-pointer transition ease-in-out duration-300 hover:text-accent" />
+        <MoreVertical className="h-5 cursor-pointer transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent" />
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Content className="  translate-y-3 transition w-28 duration-150 ease-in-out rounded bg-white dark:bg-secondaryDark shadow shadow-gray-400 dark:shadow-accent/70 flex flex-col text-black dark:text-slate-200">
@@ -136,7 +135,7 @@ export default function Dropdown({ id }: DropdownProps) {
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("edit")}
-              className="flex rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex bg-accent/5 rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Edit</p>
@@ -145,7 +144,7 @@ export default function Dropdown({ id }: DropdownProps) {
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("delete")}
-              className="flex rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex bg-accent/5 rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Delete</p>

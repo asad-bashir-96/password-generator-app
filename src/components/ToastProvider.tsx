@@ -17,7 +17,7 @@ export default function ToastProvider({ children }: TestProps) {
         pauseOnHover: false,
         autoClose: true,
         showProgressBar: false,
-        toastBackgroundColor: () => "red",
+        toastBackgroundColor: () => "#71263d",
       }}
     >
       {children}

@@ -7,7 +7,7 @@ export type NewPassword = InferModel<typeof entries, "insert">;
 
 export async function getAllPasswordsByUserId(
   userId: string
-): Promise<Password[] | null> {
+): Promise<Password[]> {
   try {
     const results = await db
       .select()
@@ -18,8 +18,7 @@ export async function getAllPasswordsByUserId(
     console.log("error has occured****************");
     console.log(e);
   }
-
-  return null;
+  return [];
 }
 
 export async function insertPassword({ secret, title, userId }: NewPassword) {
@@ -36,11 +35,15 @@ export async function insertPassword({ secret, title, userId }: NewPassword) {
   }
 }
 
-export async function updatePasswordById(id: number, password: string) {
+export async function updatePasswordById(
+  id: number,
+  password: string,
+  title: string
+) {
   try {
     await db
       .update(entries)
-      .set({ secret: password })
+      .set({ secret: password, title })
       .where(eq(entries.id, id));
     console.log("updated password");
   } catch (e) {

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { RefreshCw, Check } from "react-feather";
+import { RefreshCw, Check, X } from "react-feather";
 import generator from "generate-password-ts";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -127,7 +127,7 @@ export default function PasswordGenerator({
             <p className=" overflow-x-hidden flex-grow">{password}</p>
 
             <button className=" " onClick={generatePassword}>
-              <RefreshCw className="h-5 bg-transparent  transition ease-in-out duration-700 hover:rotate-180  hover:text-accent" />
+              <RefreshCw className="h-5 bg-transparent  transition ease-in-out duration-700 hover:rotate-180 hover:text-primary  dark:hover:text-accent" />
             </button>
           </div>
           <div className="flex w-full justify-end">
@@ -137,7 +137,7 @@ export default function PasswordGenerator({
             >
               <button
                 onClick={onCopy}
-                className="bg-primary   text-white mt-6 relative  hover:bg-primary/80 transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded"
+                className="bg-primary hover:text-primary hover:bg-accent/5  border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent dark:hover:bg-accent/5 dark:hover:text-primary  text-white mt-6 relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded"
               >
                 copy password
               </button>
@@ -153,14 +153,26 @@ export default function PasswordGenerator({
                   disabled={isDisabled.numbers}
                   checked={settings.numbers}
                   onCheckedChange={handleNumberChange}
-                  className=" flex h-5 w-5 bg-primary p-3   items-center justify-center rounded shadow-sm   border-gray-200/70 border  "
+                  className={`flex   h-5 w-5  p-3 ${
+                    isDisabled.numbers
+                      ? "dark:bg-accent/5"
+                      : "bg-primary dark:bg-accent"
+                  } dark:border-accent/50    items-center justify-center rounded shadow-sm   border-gray-200/70 border `}
                 >
                   <Checkbox.Indicator>
-                    <Check
-                      className={`transition text-white duration-150 ease-in ${
-                        isDisabled.numbers ? "bg-accent " : ""
-                      }`}
-                    />
+                    {isDisabled.numbers ? (
+                      <X
+                        className={`transition  duration-150 ease-in ${
+                          isDisabled.numbers ? "text-primary " : ""
+                        }`}
+                      />
+                    ) : (
+                      <Check
+                        className={`transition text-white duration-150 ease-in ${
+                          isDisabled.numbers ? "text-primary " : ""
+                        }`}
+                      />
+                    )}
                   </Checkbox.Indicator>
                 </Checkbox.Root>
                 <p
@@ -176,14 +188,26 @@ export default function PasswordGenerator({
                   disabled={isDisabled.lowerCase}
                   checked={settings.lowercase}
                   onCheckedChange={handleLowerCaseChange}
-                  className=" flex h-5 w-5 p-3  bg-primary   items-center justify-center rounded shadow-sm  border-gray-200/70 border  "
+                  className={`flex   h-5 w-5  p-3 ${
+                    isDisabled.lowerCase
+                      ? "bg-accent/5"
+                      : "dark:bg-accent bg-primary"
+                  } dark:border-accent/50    items-center justify-center rounded shadow-sm   border-gray-200/70 border `}
                 >
                   <Checkbox.Indicator>
-                    <Check
-                      className={`transition text-white duration-150 ease-in ${
-                        isDisabled.lowerCase ? "bg-accent " : ""
-                      }`}
-                    />
+                    {isDisabled.lowerCase ? (
+                      <X
+                        className={`transition  duration-150 ease-in ${
+                          isDisabled.lowerCase ? "text-primary " : ""
+                        }`}
+                      />
+                    ) : (
+                      <Check
+                        className={`transition text-white duration-150 ease-in ${
+                          isDisabled.lowerCase ? "text-primary " : ""
+                        }`}
+                      />
+                    )}
                   </Checkbox.Indicator>
                 </Checkbox.Root>
                 <p
@@ -199,14 +223,26 @@ export default function PasswordGenerator({
                   disabled={isDisabled.upperCase}
                   checked={settings.uppercase}
                   onCheckedChange={handleUpperCaseChange}
-                  className=" flex h-5 w-5 bg-primary p-3    items-center justify-center rounded shadow-sm  border-gray-200/70 border  "
+                  className={`flex   h-5 w-5  p-3 ${
+                    isDisabled.upperCase
+                      ? "bg-accent/5"
+                      : "bg-primary dark:bg-accent"
+                  } dark:border-accent/50    items-center justify-center rounded shadow-sm   border-gray-200/70 border `}
                 >
                   <Checkbox.Indicator>
-                    <Check
-                      className={`transition text-white duration-150 ease-in ${
-                        isDisabled.upperCase ? "bg-accent " : ""
-                      }`}
-                    />
+                    {isDisabled.upperCase ? (
+                      <X
+                        className={`transition  duration-150 ease-in ${
+                          isDisabled.upperCase ? "text-primary " : ""
+                        }`}
+                      />
+                    ) : (
+                      <Check
+                        className={`transition text-white duration-150 ease-in ${
+                          isDisabled.upperCase ? "text-primary " : ""
+                        }`}
+                      />
+                    )}
                   </Checkbox.Indicator>
                 </Checkbox.Root>
                 <p
@@ -222,14 +258,26 @@ export default function PasswordGenerator({
                   disabled={isDisabled.symbols}
                   checked={settings.symbols}
                   onCheckedChange={handleSymbloChange}
-                  className=" flex h-5 w-5 p-3  bg-primary   items-center justify-center rounded shadow-sm    border-gray-200/70 border  "
+                  className={`flex   h-5 w-5  p-3 ${
+                    isDisabled.symbols
+                      ? "bg-accent/5"
+                      : "bg-primary dark:bg-accent"
+                  } dark:border-accent/50    items-center justify-center rounded shadow-sm   border-gray-200/70 border `}
                 >
                   <Checkbox.Indicator>
-                    <Check
-                      className={`transition text-white duration-150 ease-in ${
-                        isDisabled.symbols ? "bg-accent " : ""
-                      }`}
-                    />
+                    {isDisabled.symbols ? (
+                      <X
+                        className={`transition duration-150 ease-in ${
+                          isDisabled.symbols ? "text-primary " : ""
+                        }`}
+                      />
+                    ) : (
+                      <Check
+                        className={`transition text-white duration-150 ease-in ${
+                          isDisabled.symbols ? "text-primary " : ""
+                        }`}
+                      />
+                    )}
                   </Checkbox.Indicator>
                 </Checkbox.Root>
                 <p

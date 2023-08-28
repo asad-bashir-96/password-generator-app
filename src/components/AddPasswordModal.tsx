@@ -40,6 +40,7 @@ export default function AddPasswordModal() {
                 Title
               </label>
               <input
+                required
                 className="p-1 w-full  shadow outline-none  ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800  rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
                 type="text"
                 name="title"
@@ -49,6 +50,7 @@ export default function AddPasswordModal() {
                 Password
               </label>
               <input
+                required
                 className="p-1 w-full shadow outline-none ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800   rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
                 type="password"
                 name="password"
@@ -64,7 +66,7 @@ export default function AddPasswordModal() {
         </Dialog.Content>
       </Dialog.Overlay>
       <Dialog.Trigger asChild>
-        <button className="mt-3 py-3 border border-primary dark:border-accent/50  px-4 rounded transition duration-150 ease-in dark:hover:border-accent dark:hover:bg-accent/5 dark:hover:text-primary hover:text-accent dark:bg-accent bg-primary text-slate-200">
+        <button className="mt-3 py-3  hover:text-primary hover:bg-accent/5  border border-primary dark:border-accent/50  px-4 rounded transition duration-150 ease-in dark:hover:border-accent/50 dark:hover:bg-accent/5 dark:hover:text-primary  dark:bg-accent bg-primary text-white">
           Add Password
         </button>
       </Dialog.Trigger>

@@ -15,13 +15,13 @@ export default function Header() {
           <ul className="flex items-center gap-6">
             <Link
               href="/sign-in"
-              className="cursor-pointer transition ease-in duration-150 hover:text-accent dark:hover:text-primary"
+              className="cursor-pointer  p-2 transition ease-in duration-150 hover:text-accent dark:hover:text-primary"
             >
               Sign In
             </Link>
             <Link
               href="/sign-up"
-              className="dark:bg-primary bg-accent hover:text-primary  dark:hover:text-accent transition ease-in duration-150 cursor-pointer px-4 py-2 rounded"
+              className="bg-accent   hover:text-primary   border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent dark:hover:bg-accent/5 dark:hover:text-primary  text-white relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded"
             >
               Sign Up
             </Link>
