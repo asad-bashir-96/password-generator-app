@@ -1,14 +1,12 @@
 import Link from "next/link";
+
 import { auth, UserButton } from "@clerk/nextjs";
 export default function Header() {
   const { userId } = auth();
 
   return (
     <header className="text-slate-200 bg-primary dark:bg-secondary shadow-md mb-2 dark:shadow-accent/50 shadow-primary/70 md:text-2xl text-xl">
-      <div className="container p-6 flex items-center justify-between mx-auto">
-        <Link href={"/"}>
-          <p>LOGO</p>
-        </Link>
+      <div className="container p-6 flex items-center justify-end mx-auto">
         {userId ? (
           <UserButton afterSignOutUrl="/" />
         ) : (
