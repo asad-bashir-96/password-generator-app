@@ -25,9 +25,7 @@ export default function SavedPassword({
   return (
     <>
       <div className="flex flex-col odd:bg-primary/5 odd:shadow dark:odd:bg-accent/5  rounded-sm gap-2  p-2">
-        <p className="select-none font-extralight text-xl capitalize  ">
-          {title}
-        </p>
+        <p className="font-extralight text-xl capitalize  ">{title}</p>
 
         <div className="flex justify-between  w-full  ">
           <input
