@@ -124,7 +124,7 @@ export default function PasswordGenerator({
             generate password
           </h2>
           <div className="  items-center justify-between pb-1 border-b-2  rounded-sm dark:border-accent border-gray-200 shadow p-1  flex text-2xl">
-            <p className=" overflow-x-hidden flex-grow">{password}</p>
+            <p className=" overflow-hidden flex-grow">{password}</p>
 
             <button className=" " onClick={generatePassword}>
               <RefreshCw className="h-5 bg-transparent  transition ease-in-out duration-700 hover:rotate-180 hover:text-primary  dark:hover:text-accent" />
