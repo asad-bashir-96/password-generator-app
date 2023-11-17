@@ -6,13 +6,13 @@ import Dropdown from "./Dropdown";
 import { useToast } from "rc-toastr";
 type SavedPasswordProps = {
   title: string;
-  secret: string;
+  password: string;
   id: number;
 };
 
 export default function SavedPassword({
   title,
-  secret,
+  password,
   id,
 }: SavedPasswordProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -32,7 +32,7 @@ export default function SavedPassword({
             disabled
             className="bg-transparent flex w-full rounded   focus:outline-none "
             type={isPasswordVisible ? "text" : "password"}
-            defaultValue={secret}
+            defaultValue={password}
           />
 
           <div className="flex  justify-between  items-center  gap-1">
@@ -52,13 +52,16 @@ export default function SavedPassword({
               </button>
             )}
 
-            <CopyToClipboard onCopy={() => console.log("copied")} text={secret}>
+            <CopyToClipboard
+              onCopy={() => console.log("copied")}
+              text={password}
+            >
               <button onClick={onCopy}>
                 <Copy className="h-5  transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent" />
               </button>
             </CopyToClipboard>
 
-            <Dropdown id={id} />
+            <Dropdown password={password} title={title} id={id} />
           </div>
         </div>
       </div>

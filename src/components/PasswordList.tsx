@@ -21,7 +21,7 @@ export default async function PasswordList() {
             <SavedPassword
               id={entry.id}
               key={index}
-              secret={entry.secret}
+              password={entry.secret}
               title={entry.title}
             />
           ))}

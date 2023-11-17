@@ -147,7 +147,7 @@ export default function PasswordGenerator({
             <p className=" ">{`Length (${settings.length})`}</p>
             <Slider settings={settings} setSettings={setSettings} />
 
-            <ul className="flex flex-wrap gap-6 justify-between">
+            <ul className="flex flex-wrap gap-6  justify-between">
               <li className="flex gap-2 items-center  ">
                 <Checkbox.Root
                   disabled={isDisabled.numbers}

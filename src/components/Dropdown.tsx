@@ -2,18 +2,21 @@ import { useState, useTransition, useEffect } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Edit, MoreVertical } from "react-feather";
-
+import { Eye, EyeOff } from "react-feather";
 import { editPassword, deletePassword } from "@/lib/actions";
 type DialogType = "edit" | "delete";
 
 type DropdownProps = {
   id: number;
+  password?: string;
+  title?: string;
 };
 
-export default function Dropdown({ id }: DropdownProps) {
+export default function Dropdown({ id, title, password }: DropdownProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [type, setType] = useState<DialogType>();
   const [isPending, startTransition] = useTransition();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   useEffect(() => {
     if (isPending) return;
@@ -35,13 +38,13 @@ export default function Dropdown({ id }: DropdownProps) {
   function Form() {
     switch (type) {
       case "edit":
-        return <EditPasswordForm id={id} />;
+        return <EditPasswordForm title={title} password={password} id={id} />;
 
       case "delete":
         return <DeletePasswordForm id={id} />;
     }
   }
-  function EditPasswordForm({ id }: DropdownProps) {
+  function EditPasswordForm({ id, title, password }: DropdownProps) {
     return (
       <form
         action={onEditSubmit}
@@ -58,25 +61,51 @@ export default function Dropdown({ id }: DropdownProps) {
             className="p-1 w-full shadow outline-none ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800   rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
             type="text"
             name="title"
-            id="title"
+            defaultValue={title}
           />
 
           <label className="block text-lg" htmlFor="newpassword">
             Edit Password
           </label>
 
-          <input
-            required
-            className="p-1 w-full shadow outline-none ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800   rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
-            type="password"
-            name="newpassword"
-            id="newpassword"
-          />
+          <div className="relative">
+            <input
+              required
+              className="p-1 w-full shadow outline-none ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800   rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
+              type={isPasswordVisible ? "text" : "password"}
+              name="newpassword"
+              id="newpassword"
+              defaultValue={password}
+            />
+            {isPasswordVisible ? (
+              <button>
+                <Eye
+                  className="h-5 absolute -right-9  top-1/4 transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent"
+                  onClick={() => setIsPasswordVisible((prev) => !prev)}
+                />
+              </button>
+            ) : (
+              <button>
+                <EyeOff
+                  className="h-5 absolute -right-9  top-1/4 transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent"
+                  onClick={() => setIsPasswordVisible((prev) => !prev)}
+                />
+              </button>
+            )}
+          </div>
 
           <input type="text" hidden name="id" defaultValue={id} />
 
-          <div className="flex justify-end">
-            <button className="bg-primary w-20 hover:text-primary hover:bg-accent/5  border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent  dark:hover:bg-accent/5 dark:hover:text-primary  text-white  relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded">
+          <div className="flex justify-between">
+            <span
+              className={`loading-spinner loading-lg text-primary dark:text-accent ${
+                isPending ? "loading" : ""
+              }`}
+            />
+            <button
+              disabled={isPending}
+              className="bg-primary w-20 hover:text-primary hover:bg-accent/5  border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent  dark:hover:bg-accent/5 dark:hover:text-primary  text-white  relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded"
+            >
               Edit
             </button>
           </div>
@@ -97,8 +126,17 @@ export default function Dropdown({ id }: DropdownProps) {
             Are you sure you want to delete this password?
           </p>
 
-          <div className="flex justify-end">
-            <button className="bg-primary w-20 hover:text-primary hover:bg-accent/5  border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent  dark:hover:bg-accent/5 dark:hover:text-primary  text-white  relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded">
+          <div className="flex justify-between">
+            <span
+              className={`loading-spinner loading-lg text-primary dark:text-accent ${
+                isPending ? "loading" : ""
+              }`}
+            />
+
+            <button
+              disabled={isPending}
+              className="bg-primary w-20 hover:text-primary hover:bg-accent/5  border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent  dark:hover:bg-accent/5 dark:hover:text-primary  text-white  relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded"
+            >
               Delete
             </button>
           </div>

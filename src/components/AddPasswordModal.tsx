@@ -57,7 +57,12 @@ export default function AddPasswordModal() {
                 id="password"
               />
             </fieldset>
-            <div className="w-full flex justify-end ">
+            <div className="w-full flex justify-between">
+              <span
+                className={`loading-spinner loading-lg text-primary dark:text-accent ${
+                  isPending ? "loading" : ""
+                }`}
+              />
               <button className="mt-3 py-3 border border-primary dark:border-accent/50  px-4 rounded transition duration-150 ease-in dark:hover:border-accent dark:hover:bg-accent/5 dark:hover:text-primary hover:text-accent dark:bg-accent bg-primary text-slate-200">
                 Create
               </button>
