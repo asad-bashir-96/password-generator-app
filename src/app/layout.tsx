@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -29,6 +30,7 @@ export default function RootLayout({
         >
           <Header />
           {children}
+          <Toaster position="top-right" richColors />
         </body>
       </html>
     </ClerkProvider>

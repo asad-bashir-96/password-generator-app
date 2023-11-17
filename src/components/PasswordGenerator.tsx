@@ -5,7 +5,7 @@ import generator from "generate-password-ts";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Slider from "./Slider";
-import { useToast } from "rc-toastr";
+import { toast } from "sonner";
 
 export type Settings = {
   length: number;
@@ -27,7 +27,6 @@ export default function PasswordGenerator({
 }: PasswordGeneratorProps) {
   const [password, setPassword] = useState(initialPassword);
   const [settings, setSettings] = useState(initialSettings);
-  const { toast } = useToast();
 
   const [isDisabled, setIsDisabled] = useState({
     numbers: false,
@@ -44,10 +43,6 @@ export default function PasswordGenerator({
   function generatePassword() {
     const password = generator.generate(settings);
     setPassword(password);
-  }
-
-  function onCopy() {
-    toast.success("copied");
   }
 
   function checkIfDisabled() {
@@ -136,7 +131,7 @@ export default function PasswordGenerator({
               text={password}
             >
               <button
-                onClick={onCopy}
+                onClick={() => toast.success("Copied password")}
                 className="bg-primary hover:text-primary hover:bg-accent/5  border-primary dark:border-accent/5  border dark:hover:border-accent/50 dark:bg-accent dark:hover:border-accent dark:hover:bg-accent/5 dark:hover:text-primary  text-white mt-6 relative  transition ease-in duration-100 p-2  capitalize sm:py-3 sm:px-2 rounded"
               >
                 copy password

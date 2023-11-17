@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { Eye, Copy, EyeOff } from "react-feather";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "sonner";
 import Dropdown from "./Dropdown";
-import { useToast } from "rc-toastr";
 type SavedPasswordProps = {
   title: string;
   password: string;
@@ -16,11 +16,6 @@ export default function SavedPassword({
   id,
 }: SavedPasswordProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const { toast } = useToast();
-
-  function onCopy() {
-    toast.success("copied");
-  }
 
   return (
     <>
@@ -53,11 +48,11 @@ export default function SavedPassword({
             )}
 
             <CopyToClipboard
-              onCopy={() => console.log("copied")}
+              onCopy={() => console.log("copied to clipboard")}
               text={password}
             >
-              <button onClick={onCopy}>
-                <Copy className="h-5  transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent" />
+              <button onClick={() => toast.success("Copied password")}>
+                <Copy className="h-5  transition ease-in-out duration-300  hover:text-primary dark:hover:text-accent" />
               </button>
             </CopyToClipboard>
 
