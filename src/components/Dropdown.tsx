@@ -190,7 +190,7 @@ export function Dropdown({ id, title, password }: DropdownProps) {
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("edit")}
-              className="flex bg-accent/5 rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex bg-primary/5 rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Edit</p>
@@ -199,7 +199,7 @@ export function Dropdown({ id, title, password }: DropdownProps) {
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("delete")}
-              className="flex bg-accent/5 rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex bg-primary/5 rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Delete</p>
