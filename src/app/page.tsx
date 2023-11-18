@@ -4,8 +4,12 @@ import generator from "generate-password-ts";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import EmptySvg from "../../public/empty.svg";
-export default function Home() {
+import { Suspense } from "react";
+import { getAllPasswordsByUserId } from "@/lib/controllers";
+import { PasswordListFallBack } from "@/components/PasswordListFallBack";
+export default async function Home() {
   const { userId } = auth();
+  const data = await getAllPasswordsByUserId(String(userId));
 
   const initialSettings = {
     length: 10,
@@ -19,10 +23,6 @@ export default function Home() {
   return (
     <div className="min-h-screen  relative text-black dark:text-slate-200 dark:bg-slate-900   flex gap-14  flex-col ">
       <section className="container flex flex-col gap-5 items-center mx-auto">
-        <h1 className="sm:text-4xl font-light  leading-normal  text-3xl md:text-5xl  text-center my-6   capitalize">
-          password management system
-        </h1>
-
         <PasswordGenerator
           initialSettings={initialSettings}
           initialPassword={initialPassword}
@@ -30,7 +30,9 @@ export default function Home() {
       </section>
       <main className=" container mx-auto flex-grow  flex flex-col items-center gap-6">
         {userId ? (
-          <PasswordList />
+          <Suspense fallback={<PasswordListFallBack data={data} />}>
+            <PasswordList data={data} />
+          </Suspense>
         ) : (
           <>
             <Image
