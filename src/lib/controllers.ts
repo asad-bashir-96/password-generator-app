@@ -13,6 +13,7 @@ export async function getAllPasswordsByUserId(
       .select()
       .from(entries)
       .where(eq(entries.userId, userId));
+
     return results;
   } catch (e) {
     console.log("error has occured****************");

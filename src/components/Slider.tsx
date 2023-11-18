@@ -7,7 +7,7 @@ type SliderProps = {
   setSettings: Dispatch<SetStateAction<Settings>>;
 };
 
-export default function Slider({ settings, setSettings }: SliderProps) {
+export function Slider({ settings, setSettings }: SliderProps) {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setSettings({ ...settings, length: e.target.valueAsNumber });
   }

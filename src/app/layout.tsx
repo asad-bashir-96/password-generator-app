@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import Header from "@/components/Header";
+import { Header } from "@/components/Header";
 
 const poppins = Poppins({
   subsets: ["latin"],

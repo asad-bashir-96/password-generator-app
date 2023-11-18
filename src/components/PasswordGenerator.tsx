@@ -4,7 +4,7 @@ import { RefreshCw, Check, X } from "react-feather";
 import generator from "generate-password-ts";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Slider from "./Slider";
+import { Slider } from "./Slider";
 import { toast } from "sonner";
 
 export type Settings = {
@@ -21,7 +21,7 @@ type PasswordGeneratorProps = {
   initialSettings: Settings;
 };
 
-export default function PasswordGenerator({
+export function PasswordGenerator({
   initialPassword,
   initialSettings,
 }: PasswordGeneratorProps) {

@@ -3,18 +3,14 @@ import { useState } from "react";
 import { Eye, Copy, EyeOff } from "react-feather";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "sonner";
-import Dropdown from "./Dropdown";
+import { Dropdown } from "./Dropdown";
 type SavedPasswordProps = {
   title: string;
   password: string;
   id: number;
 };
 
-export default function SavedPassword({
-  title,
-  password,
-  id,
-}: SavedPasswordProps) {
+export function SavedPassword({ title, password, id }: SavedPasswordProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (

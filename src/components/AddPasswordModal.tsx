@@ -1,12 +1,14 @@
 "use client";
 import { useState, useTransition, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-
+import { toast } from "sonner";
 import { addPassword } from "@/lib/actions";
+import { Eye, EyeOff } from "react-feather";
 
-export default function AddPasswordModal() {
+export function AddPasswordModal() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   useEffect(() => {
     if (isPending) return;
@@ -14,9 +16,14 @@ export default function AddPasswordModal() {
   }, [isPending]);
 
   async function onSubmit(formData: FormData) {
-    startTransition(() => {
-      addPassword(formData);
-    });
+    try {
+      startTransition(async () => {
+        await addPassword(formData);
+        toast.success("Password successfully created");
+      });
+    } catch (e) {
+      toast.error("Something went wrong");
+    }
   }
 
   return (
@@ -41,7 +48,7 @@ export default function AddPasswordModal() {
               </label>
               <input
                 required
-                className="p-1 w-full  shadow outline-none  ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800  rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
+                className="p-1 w-full   shadow outline-none  ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800  rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
                 type="text"
                 name="title"
                 id="title"
@@ -52,20 +59,35 @@ export default function AddPasswordModal() {
               <input
                 required
                 className="p-1 w-full shadow outline-none ring-2 ring-primary/90 dark:ring-accent/50  text-xl bg-white dark:bg-neutral-800   rounded  mb-2 focus:outline-primary  dark:focus:outline-accent"
-                type="password"
+                type={isPasswordVisible ? "text" : "password"}
                 name="password"
                 id="password"
               />
             </fieldset>
-            <div className="w-full flex justify-between">
+            <div className="relative items-center flex justify-between">
               <span
                 className={`loading-spinner loading-lg text-primary dark:text-accent ${
                   isPending ? "loading" : ""
                 }`}
               />
-              <button className="mt-3 py-3 border border-primary dark:border-accent/50  px-4 rounded transition duration-150 ease-in dark:hover:border-accent dark:hover:bg-accent/5 dark:hover:text-primary hover:text-accent dark:bg-accent bg-primary text-slate-200">
+              <button className="py-3 mt-3 border border-primary dark:border-accent/50  px-4 rounded transition duration-150 ease-in dark:hover:border-accent dark:hover:bg-accent/5 dark:hover:text-primary hover:text-accent dark:bg-accent bg-primary text-slate-200">
                 Create
               </button>
+              {isPasswordVisible ? (
+                <button className="absolute -top-9 -right-9" type="button">
+                  <Eye
+                    className="h-5  transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent"
+                    onClick={() => setIsPasswordVisible((prev) => !prev)}
+                  />
+                </button>
+              ) : (
+                <button className="absolute -top-9 -right-9" type="button">
+                  <EyeOff
+                    className="h-5 transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent"
+                    onClick={() => setIsPasswordVisible((prev) => !prev)}
+                  />
+                </button>
+              )}
             </div>
           </form>
         </Dialog.Content>

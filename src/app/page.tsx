@@ -1,5 +1,5 @@
-import PasswordList from "@/components/PasswordList";
-import PasswordGenerator from "@/components/PasswordGenerator";
+import { PasswordList } from "@/components/PasswordList";
+import { PasswordGenerator } from "@/components/PasswordGenerator";
 import generator from "generate-password-ts";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
@@ -34,7 +34,7 @@ export default function Home() {
         ) : (
           <>
             <Image
-              className="h-48  rounded-full shadow w-fit"
+              className="h-48 rounded-full shadow w-fit"
               alt="must be signed in to manage passwords"
               src={EmptySvg}
             />

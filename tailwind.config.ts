@@ -13,6 +13,7 @@ const config: Config = {
       },
       colors: {
         primary: "#71263d",
+        secondaryPrimary: "#2D0E18",
         secondary: "#030b16",
         secondaryDark: "#02080f",
         accent: "#547fbb",

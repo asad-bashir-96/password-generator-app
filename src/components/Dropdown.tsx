@@ -4,6 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Edit, MoreVertical } from "react-feather";
 import { Eye, EyeOff } from "react-feather";
 import { editPassword, deletePassword } from "@/lib/actions";
+import { toast } from "sonner";
 type DialogType = "edit" | "delete";
 
 type DropdownProps = {
@@ -12,7 +13,7 @@ type DropdownProps = {
   title?: string;
 };
 
-export default function Dropdown({ id, title, password }: DropdownProps) {
+export function Dropdown({ id, title, password }: DropdownProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [type, setType] = useState<DialogType>();
   const [isPending, startTransition] = useTransition();
@@ -24,15 +25,25 @@ export default function Dropdown({ id, title, password }: DropdownProps) {
   }, [isPending]);
 
   async function onDeleteSubmit(formData: FormData) {
-    startTransition(() => {
-      deletePassword(formData);
-    });
+    try {
+      startTransition(async () => {
+        await deletePassword(formData);
+        toast.success("Password successfully deleted");
+      });
+    } catch (e) {
+      toast.error("Something went wrong");
+    }
   }
 
   async function onEditSubmit(formData: FormData) {
-    startTransition(() => {
-      editPassword(formData);
-    });
+    try {
+      startTransition(async () => {
+        await editPassword(formData);
+        toast.success("Password successfully edited");
+      });
+    } catch (e) {
+      toast.error("Something went wrong");
+    }
   }
 
   function Form() {
@@ -123,7 +134,13 @@ export default function Dropdown({ id, title, password }: DropdownProps) {
         <h3 className="text-3xl">Delete password</h3>
         <div className="flex flex-col gap-6 mt-5">
           <p className="text-xl">
-            Are you sure you want to delete this password?
+            Are you sure you want to{" "}
+            <span className="text-primary font-semibold">delete</span> this
+            password?
+          </p>
+          <p>
+            Password is associated with{" "}
+            <span className="text-primary text-xl">title</span>
           </p>
 
           <div className="flex justify-between">
