@@ -52,7 +52,7 @@ export function Dropdown({ id, title, password }: DropdownProps) {
         return <EditPasswordForm title={title} password={password} id={id} />;
 
       case "delete":
-        return <DeletePasswordForm id={id} />;
+        return <DeletePasswordForm title={title} id={id} />;
     }
   }
   function EditPasswordForm({ id, title, password }: DropdownProps) {
@@ -125,7 +125,7 @@ export function Dropdown({ id, title, password }: DropdownProps) {
     );
   }
 
-  function DeletePasswordForm({ id }: DropdownProps) {
+  function DeletePasswordForm({ id, title }: DropdownProps) {
     return (
       <form
         action={onDeleteSubmit}
@@ -140,7 +140,7 @@ export function Dropdown({ id, title, password }: DropdownProps) {
           </p>
           <p>
             Password is associated with{" "}
-            <span className="text-primary text-xl">title</span>
+            <span className="text-primary text-xl">{title}</span>
           </p>
 
           <div className="flex justify-between">
@@ -190,7 +190,7 @@ export function Dropdown({ id, title, password }: DropdownProps) {
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("edit")}
-              className="flex bg-primary/5 rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex bg-primary/5 dark:bg-secondary rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Edit</p>
@@ -199,7 +199,7 @@ export function Dropdown({ id, title, password }: DropdownProps) {
           <DropdownMenu.Item className="outline-none">
             <li
               onClick={() => openDialog("delete")}
-              className="flex bg-primary/5 rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
+              className="flex bg-primary/5 dark:bg-secondary rounded py-4 transition ease-in px-2 duration-150 hover:bg-primary hover:text-slate-200 dark:hover:bg-accent/60 items-center cursor-pointer justify-between"
             >
               <Edit className="h-5" />
               <p>Delete</p>

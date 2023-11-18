@@ -1,7 +1,13 @@
 "use client";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Password } from "@/lib/controllers";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { Search } from "react-feather";
 import { SavedPassword } from "./SavedPassword";
 
@@ -14,8 +20,12 @@ export function SavedPasswordsWrapper({
   items,
   length,
 }: SavedPasswordsWrapperProps) {
-  const [parent] = useAutoAnimate();
   const [filteredItems, setFilteredItems] = useState(items);
+  const [parent] = useAutoAnimate();
+
+  useEffect(() => {
+    setFilteredItems(items);
+  }, [items]);
 
   return (
     <div
@@ -26,7 +36,6 @@ export function SavedPasswordsWrapper({
         <p className="sm:text-xl text-lg font-extralight">{`${length} password saved`}</p>
         <SearchBar initialItems={items} setFilteredItems={setFilteredItems} />
       </div>
-
       {filteredItems.length ? (
         filteredItems.map((item) => (
           <SavedPassword
@@ -47,17 +56,9 @@ export function SavedPasswordsWrapper({
 
 type SearchBarProps = {
   initialItems: Password[];
-  setFilteredItems: Dispatch<
-    SetStateAction<
-      {
-        title: string;
-        userId: string;
-        id: number;
-        secret: string;
-      }[]
-    >
-  >;
+  setFilteredItems: Dispatch<SetStateAction<Password[]>>;
 };
+
 export function SearchBar({ setFilteredItems, initialItems }: SearchBarProps) {
   const [query, setQuery] = useState("");
 
