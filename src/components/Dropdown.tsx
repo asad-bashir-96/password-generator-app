@@ -1,7 +1,7 @@
 import { useState, useTransition, useEffect } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Edit, MoreVertical } from "react-feather";
+import { Edit, Edit3 } from "react-feather";
 import { Eye, EyeOff } from "react-feather";
 import { editPassword, deletePassword } from "@/lib/actions";
 import { toast } from "sonner";
@@ -182,7 +182,7 @@ export function Dropdown({ id, title, password }: DropdownProps) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <MoreVertical className="h-5 cursor-pointer transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent" />
+        <Edit3 className="h-5 cursor-pointer stroke-1 transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent" />
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Content className="  translate-y-3 transition w-28 duration-150 ease-in-out rounded bg-white dark:bg-secondaryDark shadow shadow-gray-400 dark:shadow-accent/70 flex flex-col text-black dark:text-slate-200">

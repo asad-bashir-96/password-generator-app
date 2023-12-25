@@ -80,8 +80,8 @@ export function SearchBar({ setFilteredItems, initialItems }: SearchBarProps) {
   }
 
   return (
-    <div className="flex bg-primary/5  dark:bg-secondaryDark py-2 px-4 rounded-full items-center">
-      <Search className="stroke-primary  dark:stroke-accent" />
+    <div className="flex bg-primary/5  dark:bg-secondaryDark py-2 px-3 rounded-md items-center">
+      <Search className="stroke-primary mr-1 dark:stroke-accent" />
       <input
         onChange={onChange}
         value={query}

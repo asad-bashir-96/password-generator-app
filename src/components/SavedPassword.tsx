@@ -31,14 +31,14 @@ export function SavedPassword({ title, password, id }: SavedPasswordProps) {
               <button>
                 <EyeOff
                   onClick={() => setIsPasswordVisible((prev) => !prev)}
-                  className="h-5  transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent"
+                  className="h-5 stroke-1   transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent"
                 />
               </button>
             ) : (
               <button>
                 <Eye
                   onClick={() => setIsPasswordVisible((prev) => !prev)}
-                  className="h-5  transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent"
+                  className="h-5 stroke-1  transition ease-in-out duration-300 hover:text-primary dark:hover:text-accent"
                 />
               </button>
             )}
@@ -48,7 +48,7 @@ export function SavedPassword({ title, password, id }: SavedPasswordProps) {
               text={password}
             >
               <button onClick={() => toast.success("Copied password")}>
-                <Copy className="h-5  transition ease-in-out duration-300  hover:text-primary dark:hover:text-accent" />
+                <Copy className="h-5 stroke-1  transition ease-in-out duration-300  hover:text-primary dark:hover:text-accent" />
               </button>
             </CopyToClipboard>
 
